@@ -31527,6 +31527,7 @@ cljs.core.tagged_literal = function cljs$core$tagged_literal(tag, form) {
 };
 goog.provide("warm_places.core");
 goog.require("cljs.core");
+document.write("\x3ch1\x3eHello and Welcome to Warm Places\x3c/h1\x3e");
 warm_places.core.average = function warm_places$core$average(a, b) {
   return (a + b) / 2;
 };
@@ -33253,6 +33254,64 @@ speclj.reporting.report_error_STAR_ = function speclj$reporting$report_error_STA
     break;
   }
 };
+goog.provide("speclj.report.silent");
+goog.require("cljs.core");
+goog.require("speclj.reporting");
+speclj.report.silent.SilentReporter = function(passes, fails, results) {
+  this.passes = passes;
+  this.fails = fails;
+  this.results = results;
+};
+speclj.report.silent.SilentReporter.prototype.speclj$reporting$Reporter$ = true;
+speclj.report.silent.SilentReporter.prototype.speclj$reporting$Reporter$report_message$arity$2 = function(this$, message) {
+  var self__ = this;
+  var this$__$1 = this;
+  return null;
+};
+speclj.report.silent.SilentReporter.prototype.speclj$reporting$Reporter$report_description$arity$2 = function(this$, description) {
+  var self__ = this;
+  var this$__$1 = this;
+  return null;
+};
+speclj.report.silent.SilentReporter.prototype.speclj$reporting$Reporter$report_pass$arity$2 = function(this$, result) {
+  var self__ = this;
+  var this$__$1 = this;
+  return null;
+};
+speclj.report.silent.SilentReporter.prototype.speclj$reporting$Reporter$report_pending$arity$2 = function(this$, result) {
+  var self__ = this;
+  var this$__$1 = this;
+  return null;
+};
+speclj.report.silent.SilentReporter.prototype.speclj$reporting$Reporter$report_fail$arity$2 = function(this$, result) {
+  var self__ = this;
+  var this$__$1 = this;
+  return null;
+};
+speclj.report.silent.SilentReporter.prototype.speclj$reporting$Reporter$report_runs$arity$2 = function(this$, results__$1) {
+  var self__ = this;
+  var this$__$1 = this;
+  return null;
+};
+speclj.report.silent.SilentReporter.prototype.speclj$reporting$Reporter$report_error$arity$2 = function(this$, exception) {
+  var self__ = this;
+  var this$__$1 = this;
+  return null;
+};
+speclj.report.silent.SilentReporter.getBasis = function() {
+  return new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Symbol(null, "passes", "passes", -501330314, null), new cljs.core.Symbol(null, "fails", "fails", 1758545447, null), new cljs.core.Symbol(null, "results", "results", 506361414, null)], null);
+};
+speclj.report.silent.SilentReporter.cljs$lang$type = true;
+speclj.report.silent.SilentReporter.cljs$lang$ctorStr = "speclj.report.silent/SilentReporter";
+speclj.report.silent.SilentReporter.cljs$lang$ctorPrWriter = function(this__4886__auto__, writer__4887__auto__, opt__4888__auto__) {
+  return cljs.core._write.call(null, writer__4887__auto__, "speclj.report.silent/SilentReporter");
+};
+speclj.report.silent.__GT_SilentReporter = function speclj$report$silent$__GT_SilentReporter(passes, fails, results) {
+  return new speclj.report.silent.SilentReporter(passes, fails, results);
+};
+speclj.report.silent.new_silent_reporter = function speclj$report$silent$new_silent_reporter() {
+  return new speclj.report.silent.SilentReporter(cljs.core.atom.call(null, 0), cljs.core.atom.call(null, 0), cljs.core.atom.call(null, null));
+};
 goog.provide("speclj.report.progress");
 goog.require("cljs.core");
 goog.require("speclj.config");
@@ -34932,64 +34991,6 @@ speclj.report.documentation.__GT_DocumentationReporter = function speclj$report$
 };
 speclj.report.documentation.new_documentation_reporter = function speclj$report$documentation$new_documentation_reporter() {
   return new speclj.report.documentation.DocumentationReporter;
-};
-goog.provide("speclj.report.silent");
-goog.require("cljs.core");
-goog.require("speclj.reporting");
-speclj.report.silent.SilentReporter = function(passes, fails, results) {
-  this.passes = passes;
-  this.fails = fails;
-  this.results = results;
-};
-speclj.report.silent.SilentReporter.prototype.speclj$reporting$Reporter$ = true;
-speclj.report.silent.SilentReporter.prototype.speclj$reporting$Reporter$report_message$arity$2 = function(this$, message) {
-  var self__ = this;
-  var this$__$1 = this;
-  return null;
-};
-speclj.report.silent.SilentReporter.prototype.speclj$reporting$Reporter$report_description$arity$2 = function(this$, description) {
-  var self__ = this;
-  var this$__$1 = this;
-  return null;
-};
-speclj.report.silent.SilentReporter.prototype.speclj$reporting$Reporter$report_pass$arity$2 = function(this$, result) {
-  var self__ = this;
-  var this$__$1 = this;
-  return null;
-};
-speclj.report.silent.SilentReporter.prototype.speclj$reporting$Reporter$report_pending$arity$2 = function(this$, result) {
-  var self__ = this;
-  var this$__$1 = this;
-  return null;
-};
-speclj.report.silent.SilentReporter.prototype.speclj$reporting$Reporter$report_fail$arity$2 = function(this$, result) {
-  var self__ = this;
-  var this$__$1 = this;
-  return null;
-};
-speclj.report.silent.SilentReporter.prototype.speclj$reporting$Reporter$report_runs$arity$2 = function(this$, results__$1) {
-  var self__ = this;
-  var this$__$1 = this;
-  return null;
-};
-speclj.report.silent.SilentReporter.prototype.speclj$reporting$Reporter$report_error$arity$2 = function(this$, exception) {
-  var self__ = this;
-  var this$__$1 = this;
-  return null;
-};
-speclj.report.silent.SilentReporter.getBasis = function() {
-  return new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Symbol(null, "passes", "passes", -501330314, null), new cljs.core.Symbol(null, "fails", "fails", 1758545447, null), new cljs.core.Symbol(null, "results", "results", 506361414, null)], null);
-};
-speclj.report.silent.SilentReporter.cljs$lang$type = true;
-speclj.report.silent.SilentReporter.cljs$lang$ctorStr = "speclj.report.silent/SilentReporter";
-speclj.report.silent.SilentReporter.cljs$lang$ctorPrWriter = function(this__4886__auto__, writer__4887__auto__, opt__4888__auto__) {
-  return cljs.core._write.call(null, writer__4887__auto__, "speclj.report.silent/SilentReporter");
-};
-speclj.report.silent.__GT_SilentReporter = function speclj$report$silent$__GT_SilentReporter(passes, fails, results) {
-  return new speclj.report.silent.SilentReporter(passes, fails, results);
-};
-speclj.report.silent.new_silent_reporter = function speclj$report$silent$new_silent_reporter() {
-  return new speclj.report.silent.SilentReporter(cljs.core.atom.call(null, 0), cljs.core.atom.call(null, 0), cljs.core.atom.call(null, null));
 };
 goog.provide("speclj.stub");
 goog.require("cljs.core");

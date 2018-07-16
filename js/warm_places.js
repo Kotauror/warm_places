@@ -2601,6 +2601,7 @@ cljs.core._assoc = function(a, b, c) {
   return d.call(null, a, b, c);
 };
 var warm_places = {core:{}};
+document.write("\x3ch1\x3eHello and Welcome to Warm Places\x3c/h1\x3e");
 warm_places.core.average = function(a, b) {
   return (a + b) / 2;
 };
