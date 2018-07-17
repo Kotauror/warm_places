@@ -11,7 +11,7 @@
                                   [speclj "3.3.1"]]}}
   :plugins [[speclj "3.3.1"]
             [lein-cljsbuild "1.0.5"]]
-            
+
   :cljsbuild {:builds        {:dev  {:source-paths   ["src/cljs" "spec/cljs"]
                                      :compiler       {:output-to     "js/warm_places_dev.js"
                                                       :optimizations :whitespace

@@ -12,3 +12,9 @@
     (should=
       15
       (my-core/average 20 10))))
+
+(describe "Creating API query"
+  (it "builds a query string"
+    (should=
+      "http://getnearbycities.geobytes.com/GetNearbyCities?radius=100&latitude=50.058144&longitude=19.959547"
+      (my-core/api-url 50.058144 19.959547 100))))
