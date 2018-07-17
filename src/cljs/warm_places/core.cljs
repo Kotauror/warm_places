@@ -11,14 +11,14 @@
 (/ (+ a b) 2.0))
 
 (defn add-listener[]
-  (events/listen! (dom/by-id "submit") :click (fn [evt]
-    (let [latitude (dom/value (dom/by-id "latitude"))
-          longitude (dom/value (dom/by-id "longitude"))
-          radius (dom/value (dom/by-id "radius"))]
-    (dom/log "Form was submitted")
-    (dom/log latitude)
-    (dom/log longitude)
-    (dom/log radius))
-    (events/prevent-default evt))))
+  (events/listen! (js/document.getElementById "submit") :click (fn [event]
+    (let [latitude (.-value (.getElementById js/document "latitude"))
+          longitude (.-value (.getElementById js/document "longitude"))
+          radius (.-value (.getElementById js/document "radius"))]
+    (js/console.log "Form was submitted")
+    (js/console.log latitude)
+    (js/console.log longitude)
+    (js/console.log radius))
+    (events/prevent-default event))))
 
 (set! (.-onload js/window) add-listener)
