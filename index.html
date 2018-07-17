@@ -4,15 +4,16 @@
       <title>ClojureScript Hello Browser</title>
     </head>
     <body>
-      <script type="text/javascript" src="js/warm_places.js"></script>
-      <form>
+      <script action="src/cljs/warm_places/core.cljs" type="text/javascript" src="js/warm_places.js"></script>
+      <div id="txt"></div>
+      <form id="initialForm">
         Latitude:
-        <input type="text" id="lat"><br>
+        <input type="text" name="lat" id="latitude" value="51.509865"><br>
         Longitude:
-        <input type="text" id="long"><br>
-        Redius of interest:
-        <input type="text" id="radius"><br>
-        <input type="submit" name="submit">
+        <input type="text" name="long" id="longitude" value="-0.118092"><br>
+        Radius of interest:
+        <input type="text" name="radius" id="radius"  value="10"><br>
+        <input type="submit" name="submit" id="submit">
       </form>
     </body>
 </html>
