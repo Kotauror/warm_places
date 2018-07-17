@@ -15,10 +15,13 @@
     (let [latitude (.-value (.getElementById js/document "latitude"))
           longitude (.-value (.getElementById js/document "longitude"))
           radius (.-value (.getElementById js/document "radius"))]
-    (js/console.log "Form was submitted")
-    (js/console.log latitude)
-    (js/console.log longitude)
-    (js/console.log radius))
-    (events/prevent-default event))))
+    (print-to-console latitude longitude radius)
+    (events/prevent-default event)))))
+
+(defn print-to-console [latitude longitude radius]
+  (js/console.log "Form was submitted")
+  (js/console.log latitude)
+  (js/console.log longitude)
+  (js/console.log radius))
 
 (set! (.-onload js/window) add-listener)
