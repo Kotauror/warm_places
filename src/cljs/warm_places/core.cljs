@@ -25,3 +25,9 @@
     (events/prevent-default event)))))
 
 (set! (.-onload js/window) add-listener)
+
+(defn log-json [response]
+  (js/console.log response)
+  (.then (.json response) js/console.log))
+
+(.then (js/fetch "http://api.geonames.org/findNearbyPlaceNameJSON?lat=50.058144&lng=19.959547&cities=cities1000&radius=100&username=kotaur") log-json)
