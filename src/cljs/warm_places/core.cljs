@@ -7,14 +7,8 @@
 
 (enable-console-print!)
 
-(defn print-to-console [latitude longitude radius]
-  (js/console.log "Form was submitted")
-  (js/console.log latitude)
-  (js/console.log longitude)
-  (js/console.log radius))
-
 (defn api-url [latitude longitude radius]
- (str "http://getnearbycities.geobytes.com/GetNearbyCities?radius=" radius "&latitude=" latitude "&longitude=" longitude))
+ (str "http://api.geonames.org/findNearbyPlaceNameJSON?lat=" latitude "&lng=" longitude "&cities=cities1000&radius=" radius "&username=kotaur"))
 
 (defn get-city-name [city-data]
   (.-toponymName city-data))
@@ -27,9 +21,7 @@
   (events/listen! (js/document.getElementById "submit") :click (fn [event]
     (let [latitude (.-value (.getElementById js/document "latitude"))
           longitude (.-value (.getElementById js/document "longitude"))
-          radius (.-value (.getElementById js/document "radius"))]
-    (print-to-console latitude longitude radius)
-    (events/prevent-default event)))))
+          radius (.-value (.getElementById js/document "radius"))]))))
 
 (defn log-json [response]
   (js/console.log response)

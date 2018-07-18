@@ -6,12 +6,8 @@
 (describe "Creating API query"
   (it "builds a query string"
     (should=
-      "http://getnearbycities.geobytes.com/GetNearbyCities?radius=100&latitude=50.058144&longitude=19.959547"
+      "http://api.geonames.org/findNearbyPlaceNameJSON?lat=50.058144&lng=19.959547&cities=cities1000&radius=100&username=kotaur"
       (my-core/api-url 50.058144 19.959547 100))))
-
-;(def response-json
-;  (->> "{\"geonames\":[{\"toponymName\": \"Krakow\"}, {\"toponymName\": \"Warszawa\"}]}"
-;    (.parse js/JSON)))
 
 (def response-json
   (.parse js/JSON "{\"geonames\":[{\"toponymName\": \"Krakow\"}, {\"toponymName\": \"Warszawa\"}]}"))

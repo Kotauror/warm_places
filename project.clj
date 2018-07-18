@@ -4,6 +4,8 @@
   :license {:name "Eclipse Public License"
             :url  "http://www.eclipse.org/legal/epl-v10.html"}
 
+  :jvm-opts ["--add-modules" "java.xml.bind"]
+
   :dependencies [[org.clojure/clojure "1.7.0-RC2"]
                 [domina "1.0.3"]]
 
