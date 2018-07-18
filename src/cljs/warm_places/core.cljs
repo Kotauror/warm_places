@@ -16,11 +16,12 @@
 (defn api-url [latitude longitude radius]
  (str "http://getnearbycities.geobytes.com/GetNearbyCities?radius=" radius "&latitude=" latitude "&longitude=" longitude))
 
-(defn getCitiesNames [json]
+(defn get-city-name [city-data]
+  (.-toponymName city-data))
+
+(defn get-city-names [json]
   (let [cities (.-geonames json)]
-    (js/console.log cities)
-    (js/console.log (nth cities 0))
-    (js/console.log (.-toponymName (nth cities 0)))))
+    (mapv get-city-name cities)))
 
 (defn add-listener[]
   (events/listen! (js/document.getElementById "submit") :click (fn [event]
@@ -32,7 +33,7 @@
 
 (defn log-json [response]
   (js/console.log response)
-  (.then (.json response) getCitiesNames))
+  (.then (.json response) get-city-names))
 
 (set! (.-onload js/window) add-listener)
 ; (.then (js/fetch "http://api.geonames.org/findNearbyPlaceNameJSON?lat=50.058144&lng=19.959547&cities=cities1000&radius=100&username=kotaur") log-json)

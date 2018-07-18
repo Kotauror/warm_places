@@ -17,7 +17,7 @@
   (.parse js/JSON "{\"geonames\":[{\"toponymName\": \"Krakow\"}, {\"toponymName\": \"Warszawa\"}]}"))
 
 (describe "Returns toponymName"
-  (it "returns toponymName"
+  (it "returns all the city names"
     (should=
-      "Krakow"
-      (my-core/getCitiesNames response-json))))
+      ["Krakow" "Warszawa"]
+      (my-core/get-city-names response-json))))
