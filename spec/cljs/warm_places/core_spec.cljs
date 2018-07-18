@@ -9,10 +9,15 @@
       "http://getnearbycities.geobytes.com/GetNearbyCities?radius=100&latitude=50.058144&longitude=19.959547"
       (my-core/api-url 50.058144 19.959547 100))))
 
-(def json "{\"foo\": 1, \"bar\": 2, \"baz\": [1,2,3]}")
+;(def response-json
+;  (->> "{\"geonames\":[{\"toponymName\": \"Krakow\"}, {\"toponymName\": \"Warszawa\"}]}"
+;    (.parse js/JSON)))
 
-(describe "Returns first value"
-  (it "returns first value"
+(def response-json
+  (.parse js/JSON "{\"geonames\":[{\"toponymName\": \"Krakow\"}, {\"toponymName\": \"Warszawa\"}]}"))
+
+(describe "Returns toponymName"
+  (it "returns toponymName"
     (should=
-      "1"
-      (my-core/return-first-value json))))
+      "Krakow"
+      (my-core/getCitiesNames response-json))))
