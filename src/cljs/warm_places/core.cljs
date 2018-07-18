@@ -18,7 +18,9 @@
 
 (defn getCitiesData [json]
   (let [citiesData (.-geonames json)]
-    (js/console.log citiesData)))
+    (js/console.log citiesData)
+    (js/console.log (nth citiesData 0))
+    (js/console.log (.-toponymName (nth citiesData 0)))))
 
 (defn add-listener[]
   (events/listen! (js/document.getElementById "submit") :click (fn [event]
