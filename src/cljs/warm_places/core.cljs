@@ -1,8 +1,12 @@
 (ns warm_places.core
   (:require [speclj.core]
-            [warm_places.state :refer [update-longitude
+            [warm_places.state :refer [latitude
+                                      longitude
+                                      radius
+                                      update-longitude
                                       update-latitude
-                                      update-radius]]))
+                                      update-radius]]
+            [warm_places.api_call :refer [call-api]]))
 
 (enable-console-print!)
 
@@ -15,7 +19,7 @@
   (.addEventListener
     (.getElementById js/document "submit")
     "click"
-    (fn [] (console.log "proceed with API call "))))
+    (fn [] (call-api @latitude @longitude @radius))))
 
 (defn add-latitude-input-listener []
  (.addEventListener
