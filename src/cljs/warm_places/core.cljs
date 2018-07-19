@@ -30,16 +30,16 @@
   (let [cities (.-geonames json)]
     (mapv get-city-name cities)))
 
-(defn add-listener[]
-  (events/listen! (js/document.getElementById "submit") :click (fn [event]
-    (let [latitude (.-value (.getElementById js/document "latitude"))
-          longitude (.-value (.getElementById js/document "longitude"))
-          radius (.-value (.getElementById js/document "radius"))]))))
-
 (defn value-for-event [event] (.-value (.-target event)))
 
 (defn wrap-function-for-event [handler-function]
   (fn [event] (handler-function (value-for-event event))))
+
+(defn add-form-submit-listener []
+  (.addEventListener
+    (.getElementById js/document "submit")
+    "click"
+    (fn [] (console.log "hehheh"))))
 
 (defn add-latitude-input-listener []
  (.addEventListener
@@ -64,7 +64,7 @@
   (.then (.json response) get-city-names))
 
 (set! (.-onload js/window) (fn []
-                            (add-listener)
+                            (add-form-submit-listener)
                             (add-latitude-input-listener)
                             (add-longitude-input-listener)
                             (add-radius-input-listener)
