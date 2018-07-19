@@ -1,4 +1,4 @@
-(ns warm_places.core-spec
+(ns warm_places.state-spec
   (:require-macros [speclj.core :refer [describe it should=]])
   (:require [speclj.core]
             [warm_places.state :refer [update-longitude
