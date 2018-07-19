@@ -2,13 +2,7 @@
   (:require-macros [speclj.core :refer [describe it should=]])
   (:require [speclj.core]
             [warm_places.core :refer [api-url
-                                      get-city-names
-                                      update-longitude
-                                      update-latitude
-                                      update-radius
-                                      longitude
-                                      latitude
-                                      radius]]))
+                                      get-city-names]]))
 
 (describe "Creating API query"
   (it "builds a query string"
@@ -24,22 +18,3 @@
     (should=
       ["Krakow" "Warszawa"]
       (get-city-names response-json))))
-
-(describe "update atoms"
-  (it "updates latitude atom"
-   (update-latitude "10")
-   (should=
-    "10"
-    @latitude))
-
-  (it "updates longitude atom"
-    (update-longitude "10")
-    (should=
-    "10"
-    @longitude))
-
-  (it "updates radius atom"
-    (update-radius "10")
-    (should=
-    "10"
-    @radius)))

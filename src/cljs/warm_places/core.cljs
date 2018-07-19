@@ -1,21 +1,10 @@
 (ns warm_places.core
-  (:require
- [clojure.string :refer [capitalize]]))
+  (:require [speclj.core]
+            [warm_places.state :refer [update-longitude
+                                      update-latitude
+                                      update-radius]]))
 
 (enable-console-print!)
-
-(def longitude (atom ""))
-(def latitude (atom ""))
-(def radius (atom ""))
-
-(defn update-latitude [value]
-  (swap! latitude (fn [] value)))
-
-(defn update-longitude [value]
-  (swap! longitude (fn [] value)))
-
-(defn update-radius [value]
-  (swap! radius (fn [] value)))
 
 (defn api-url [latitude longitude radius]
  (str "http://api.geonames.org/findNearbyPlaceNameJSON?lat=" latitude "&lng=" longitude "&cities=cities1000&radius=" radius "&username=kotaur"))
