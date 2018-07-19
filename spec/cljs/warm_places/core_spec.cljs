@@ -5,8 +5,10 @@
                                       get-city-names
                                       update-longitude
                                       update-latitude
+                                      update-radius
                                       longitude
-                                      latitude]]))
+                                      latitude
+                                      radius]]))
 
 (describe "Creating API query"
   (it "builds a query string"
@@ -23,16 +25,21 @@
       ["Krakow" "Warszawa"]
       (get-city-names response-json))))
 
-(describe "update atoms" 
-  (it "updates latitude atom" 
+(describe "update atoms"
+  (it "updates latitude atom"
    (update-latitude "10")
    (should=
     "10"
     @latitude))
 
-  (it "updated longitude atom"
+  (it "updates longitude atom"
     (update-longitude "10")
     (should=
     "10"
     @longitude))
-)
+
+  (it "updates radius atom"
+    (update-radius "10")
+    (should=
+    "10"
+    @radius)))

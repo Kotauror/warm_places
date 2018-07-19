@@ -9,14 +9,16 @@
 
 (def longitude (atom ""))
 (def latitude (atom ""))
+(def radius (atom ""))
 
 (defn update-latitude [value]
- (swap! latitude (fn [] value))
- (js/console.log @latitude)
-)
+  (swap! latitude (fn [] value)))
 
 (defn update-longitude [value]
- (swap! longitude (fn [] value)))
+  (swap! longitude (fn [] value)))
+
+(defn update-radius [value]
+  (swap! radius (fn [] value)))
 
 (defn api-url [latitude longitude radius]
  (str "http://api.geonames.org/findNearbyPlaceNameJSON?lat=" latitude "&lng=" longitude "&cities=cities1000&radius=" radius "&username=kotaur"))
@@ -36,7 +38,7 @@
 
 (defn value-for-event [event] (.-value (.-target event)))
 
-(defn wrap-function-for-event [handler-function] 
+(defn wrap-function-for-event [handler-function]
   (fn [event] (handler-function (value-for-event event))))
 
 (defn add-latitude-input-listener []
@@ -51,6 +53,12 @@
   "change"
   (wrap-function-for-event update-longitude)))
 
+(defn add-radius-input-listener []
+  (.addEventListener
+    (.getElementById js/document "radius")
+    "change"
+    (wrap_function_for_event update-radius)))
+
 (defn log-json [response]
   (js/console.log response)
   (.then (.json response) get-city-names))
@@ -59,5 +67,6 @@
                             (add-listener)
                             (add-latitude-input-listener)
                             (add-longitude-input-listener)
+                            (add-radius-input-listener)
 ))
 ; (.then (js/fetch "http://api.geonames.org/findNearbyPlaceNameJSON?lat=50.058144&lng=19.959547&cities=cities1000&radius=100&username=kotaur") log-json)
