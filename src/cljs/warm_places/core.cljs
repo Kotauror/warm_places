@@ -57,7 +57,7 @@
   (.addEventListener
     (.getElementById js/document "radius")
     "change"
-    (wrap_function_for_event update-radius)))
+    (wrap-function-for-event update-radius)))
 
 (defn log-json [response]
   (js/console.log response)
