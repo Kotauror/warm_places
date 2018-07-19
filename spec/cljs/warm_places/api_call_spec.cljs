@@ -2,10 +2,11 @@
   (:require-macros [speclj.core :refer [describe it should= stub with-stubs should-have-invoked]])
   (:require [speclj.core]
             [warm_places.api_call :refer [api-url
-                                      fetch
-                                      call-api
-                                      get-city-name
-                                      get-city-names]]))
+                                          fetch
+                                          extract-data
+                                          call-api
+                                          get-city-name
+                                          get-city-names]]))
 
 (describe "Creating API query"
   (it "builds a query string"
@@ -25,11 +26,27 @@
 (describe "API call"
   (with-stubs)
   (it "calls fetch with correct URL"
-    (with-redefs [fetch (stub :fetch-stub)]
+    (with-redefs [
+      fetch (stub :fetch-stub {:return :response-promise})
+      extract-data (stub :extract-data-stub)
+    ]
 
       (call-api 100 200 50)
 
       (should-have-invoked
         :fetch-stub
         {:with
-          ["http://api.geonames.org/findNearbyPlaceNameJSON?lat=100&lng=200&cities=cities1000&radius=50&username=kotaur"]}))))
+          ["http://api.geonames.org/findNearbyPlaceNameJSON?lat=100&lng=200&cities=cities1000&radius=50&username=kotaur"]})))
+
+    (it "calls extract-data with result of fetch and get-city-names function"
+      (with-redefs [
+        fetch (stub :fetch-stub {:return :response-promise})
+        extract-data (stub :extract-data-stub)
+      ]
+
+        (call-api 100 200 50)
+
+        (should-have-invoked
+          :extract-data-stub
+          {:with
+            [:response-promise get-city-names]}))))

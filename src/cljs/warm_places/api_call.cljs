@@ -12,13 +12,16 @@
   (let [cities (.-geonames json)]
     (mapv get-city-name cities)))
 
-; this function returns a json data structure PROMISE
-; (defn fetch-data [latitude longitude radius]
-;   (.json (.then (.js/fetch "http://api.geonames.org/findNearbyPlaceNameJSON?lat=50.058144&lng=19.959547&cities=cities1000&radius=100&username=kotaur"))))
-
+;untested
 (defn fetch [url]
   (.js/fetch url))
 
+;untested
+(defn extract-data [response-promise callback]
+  (.then (.json (.then response-promise))) callback)
+
 (defn call-api [latitude longitude radius]
-  (fetch (api-url latitude longitude radius))
+  (extract-data
+    (fetch (api-url latitude longitude radius))
+    get-city-names)
   )
