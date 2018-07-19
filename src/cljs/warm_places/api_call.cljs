@@ -1,4 +1,5 @@
-(ns warm_places.api_call)
+(ns warm_places.api_call
+  (:require [warm_places.state :refer [update-cities-state]]))
 
 (enable-console-print!)
 
@@ -29,8 +30,8 @@
   (let [response-promise (fetch (api-url latitude longitude radius))]
   (extract-data response-promise get-city-names)))
 
-;(defn update-list-of-cities [latitude longitude radius]
-;  (let [new-cities (call-api latitude longitude radius)]
-;    (swap! cities #(new-cities))
-;  )
-;)
+(defn update-list-of-cities [latitude longitude radius]
+ (let [new-cities (call-api latitude longitude radius)]
+   (update-cities-state new-cities)
+ )
+)
