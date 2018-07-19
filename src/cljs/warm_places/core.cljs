@@ -1,9 +1,6 @@
 (ns warm_places.core
   (:require
- [clojure.string :refer [capitalize]]
- [domina :as dom]
- [domina.css :as css]
- [domina.events :as events]))
+ [clojure.string :refer [capitalize]]))
 
 (enable-console-print!)
 
