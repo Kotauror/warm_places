@@ -4,9 +4,11 @@
             [warm_places.state :refer [update-longitude
                                       update-latitude
                                       update-radius
+                                      update-cities-state
                                       longitude
                                       latitude
-                                      radius]]))
+                                      radius
+                                      cities]]))
 
 (describe "update atoms"
   (it "updates latitude atom"
@@ -25,4 +27,10 @@
     (update-radius "10")
     (should=
     "10"
-    @radius)))
+    @radius))
+
+  (it "updates cities atom"
+    (update-cities-state ["Krakow" "Warszawa"])
+    (should=
+    ["Krakow" "Warszawa"]
+    @cities)))

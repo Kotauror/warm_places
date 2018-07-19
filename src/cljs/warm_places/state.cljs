@@ -5,6 +5,7 @@
 (def longitude (atom ""))
 (def latitude (atom ""))
 (def radius (atom ""))
+(def cities (atom []))
 
 (defn update-latitude [value]
   (swap! latitude (fn [] value)))
@@ -14,3 +15,6 @@
 
 (defn update-radius [value]
   (swap! radius (fn [] value)))
+
+(defn update-cities-state [new-cities]
+  (swap! cities (fn [] new-cities)))

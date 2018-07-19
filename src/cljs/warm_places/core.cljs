@@ -5,7 +5,9 @@
                                       radius
                                       update-longitude
                                       update-latitude
-                                      update-radius]]
+                                      update-radius
+                                      ;update-list-of-cities
+                                      ]]
             [warm_places.api_call :refer [call-api]]))
 
 (enable-console-print!)
@@ -19,6 +21,7 @@
   (.addEventListener
     (.getElementById js/document "submit")
     "click"
+    ;#(update-list-of-cities @latitude @longitude @radius)))
     (fn [] (call-api @latitude @longitude @radius))))
 
 (defn add-latitude-input-listener []
