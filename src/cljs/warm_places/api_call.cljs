@@ -23,20 +23,17 @@
   (js/fetch url))
 
 ;untested
-(defn manipulate-json [response callback]
+(defn use-json [response callback]
   (.then (.json response) callback))
 
 ;untested
 (defn extract-data [response-promise callback]
-  (.then response-promise (fn [response] (manipulate-json response callback))))
-  ; (.then response-promise #(manipulate-json %1 callback))
+  (.then response-promise (fn [response] (use-json response callback))))
+  ; (.then response-promise #(use-json %1 callback))
 
-(defn call-api [latitude longitude radius]
+(defn call-api [latitude longitude radius callback]
   (let [response-promise (fetch (api-url latitude longitude radius))]
-  (extract-data response-promise update-cities-from-json)))
+  (extract-data response-promise callback)))
 
 (defn handle-get-cities-click [latitude longitude radius]
- (let [new-cities (call-api latitude longitude radius)]
-   (update-cities-state new-cities)
- )
-)
+ (call-api latitude longitude radius update-cities-from-json))

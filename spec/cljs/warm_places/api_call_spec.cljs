@@ -27,7 +27,7 @@
       ["Krakow" "Warszawa"]
       (get-city-names response-json))))
 
-(describe "API call"
+(describe "call-api"
   (with-stubs)
   (it "calls fetch with correct URL"
     (with-redefs [
@@ -35,40 +35,39 @@
       extract-data (stub :extract-data-stub)
     ]
 
-      (call-api 100 200 50)
+      (call-api 100 200 50 :callback)
 
       (should-have-invoked
         :fetch-stub
         {:with
           ["http://api.geonames.org/findNearbyPlaceNameJSON?lat=100&lng=200&cities=cities1000&radius=50&username=kotaur"]})))
 
-    (it "calls extract-data with result of fetch and update-cities-from-json function"
+    (it "calls extract-data with result of fetch and passed in callback"
       (with-redefs [
         fetch (stub :fetch-stub {:return :response-promise})
         extract-data (stub :extract-data-stub)
       ]
 
-        (call-api 100 200 50)
+        (call-api 100 200 50 :callback)
 
         (should-have-invoked
           :extract-data-stub
           {:with
-            [:response-promise update-cities-from-json]}))))
+            [:response-promise :callback]}))))
 
 (describe "handle-get-cities-click"
   (with-stubs)
-  (it "calls update-cities-state with return of call-api"
+  (it "calls call-api with given values and update-cities-from-json"
     (with-redefs [
-      call-api (stub :call-api-stub {:return ["Krakow" "Warszawa"]})
-      update-cities-state (stub :update-cities-state-stub)
+      call-api (stub :call-api-stub)
       ]
 
       (handle-get-cities-click 100 200 50)
 
       (should-have-invoked
-        :update-cities-state-stub
+        :call-api-stub
         {:with
-          [["Krakow" "Warszawa"]]}))))
+          [100 200 50 update-cities-from-json]}))))
 
 (describe "Update-cities-from-json"
   (it "gets cities from JSON and updates cities atom"
