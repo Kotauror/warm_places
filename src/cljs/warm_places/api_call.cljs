@@ -1,5 +1,7 @@
 (ns warm_places.api_call
-  (:require [warm_places.state :refer [update-cities-state]]))
+  (:require [warm_places.state :refer [update-cities-state
+                                      cities]]
+            [warm_places.dom_manipulation :refer [update-dom]]))
 
 (enable-console-print!)
 
@@ -17,7 +19,8 @@
 (defn update-cities-from-json [json]
   (-> json
     (get-city-names)
-    (update-cities-state)))
+    (update-cities-state))
+  (update-dom cities))
 
 ;untested
 (defn fetch [url]
