@@ -13,6 +13,11 @@
   (let [cities (.-geonames json)]
     (mapv get-city-name cities)))
 
+(defn update-cities-from-json [json]
+  (-> json
+    (get-city-names)
+    (update-cities-state)))
+
 ;untested
 (defn fetch [url]
   (js/fetch url))
@@ -30,7 +35,7 @@
   (let [response-promise (fetch (api-url latitude longitude radius))]
   (extract-data response-promise get-city-names)))
 
-(defn update-list-of-cities [latitude longitude radius]
+(defn handle-get-cities-click [latitude longitude radius]
  (let [new-cities (call-api latitude longitude radius)]
    (update-cities-state new-cities)
  )

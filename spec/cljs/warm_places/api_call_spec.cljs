@@ -7,8 +7,10 @@
                                           call-api
                                           get-city-name
                                           get-city-names
-                                          update-list-of-cities]]
-            [warm_places.state :refer [update-cities-state]]))
+                                          handle-get-cities-click
+                                          update-cities-from-json]]
+            [warm_places.state :refer [update-cities-state
+                                       cities]]))
 
 (describe "Creating API query"
   (it "builds a query string"
@@ -53,7 +55,7 @@
           {:with
             [:response-promise get-city-names]}))))
 
-(describe "Update-list-of-cities"
+(describe "handle-get-cities-click"
   (with-stubs)
   (it "calls update-cities-state with return of call-api"
     (with-redefs [
@@ -61,9 +63,18 @@
       update-cities-state (stub :update-cities-state-stub)
       ]
 
-      (update-list-of-cities 100 200 50)
+      (handle-get-cities-click 100 200 50)
 
       (should-have-invoked
         :update-cities-state-stub
         {:with
           [["Krakow" "Warszawa"]]}))))
+
+(describe "Update-cities-from-json"
+  (it "gets cities from JSON and updates cities atom"
+
+  (update-cities-from-json response-json)
+
+  (should=
+    ["Krakow" "Warszawa"]
+    @cities)))
