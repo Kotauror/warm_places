@@ -10,8 +10,9 @@
   (.-toponymName city-data))
 
 (defn get-city-names [json]
-  (let [cities (.-geonames json)]
-    (mapv get-city-name cities)))
+  (->> json
+    (.-geonames)
+    (mapv get-city-name)))
 
 (defn update-cities-from-json [json]
   (-> json
@@ -28,12 +29,12 @@
 
 ;untested
 (defn extract-data [response-promise callback]
-  (.then response-promise (fn [response] (use-json response callback))))
-  ; (.then response-promise #(use-json %1 callback))
+  (.then response-promise #(use-json %1 callback)))
 
 (defn call-api [latitude longitude radius callback]
-  (let [response-promise (fetch (api-url latitude longitude radius))]
-  (extract-data response-promise callback)))
+  (-> (api-url latitude longitude radius)
+    (fetch)
+    (extract-data callback)))
 
 (defn handle-get-cities-click [latitude longitude radius]
  (call-api latitude longitude radius update-cities-from-json))
