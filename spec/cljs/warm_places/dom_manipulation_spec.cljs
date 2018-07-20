@@ -10,4 +10,4 @@
 
     (should=
       2
-      (.length (.querySelectorAll js/document "li")))))
+      (.-length (.querySelectorAll js/document "li")))))

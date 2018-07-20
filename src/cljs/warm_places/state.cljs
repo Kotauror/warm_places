@@ -17,4 +17,6 @@
   (swap! radius (fn [] value)))
 
 (defn update-cities-state [new-cities]
-  (swap! cities (fn [] new-cities)))
+  (swap! cities (fn [] new-cities))
+  ; (console.log @cities)
+  )

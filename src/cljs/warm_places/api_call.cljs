@@ -20,7 +20,7 @@
   (-> json
     (get-city-names)
     (update-cities-state))
-  (update-dom cities))
+  (update-dom @cities))
 
 ;untested
 (defn fetch [url]

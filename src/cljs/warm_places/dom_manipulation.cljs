@@ -3,7 +3,7 @@
 (enable-console-print!)
 
 (defn add-city-to-dom-list [city]
-  (let [li-node (.createElement js/document "LI")]
+  (let [li-node (.createElement js/document "li")]
         [text-node (.createTextNode js/document city)]
         (.appendChild li-node text-node)
         (.appendChild (.getElementById js/document "cities") li-node)))
