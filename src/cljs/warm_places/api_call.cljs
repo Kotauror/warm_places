@@ -33,7 +33,7 @@
 
 (defn call-api [latitude longitude radius]
   (let [response-promise (fetch (api-url latitude longitude radius))]
-  (extract-data response-promise get-city-names)))
+  (extract-data response-promise update-cities-from-json)))
 
 (defn handle-get-cities-click [latitude longitude radius]
  (let [new-cities (call-api latitude longitude radius)]

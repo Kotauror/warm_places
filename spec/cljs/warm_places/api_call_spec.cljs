@@ -42,7 +42,7 @@
         {:with
           ["http://api.geonames.org/findNearbyPlaceNameJSON?lat=100&lng=200&cities=cities1000&radius=50&username=kotaur"]})))
 
-    (it "calls extract-data with result of fetch and get-city-names function"
+    (it "calls extract-data with result of fetch and update-cities-from-json function"
       (with-redefs [
         fetch (stub :fetch-stub {:return :response-promise})
         extract-data (stub :extract-data-stub)
@@ -53,7 +53,7 @@
         (should-have-invoked
           :extract-data-stub
           {:with
-            [:response-promise get-city-names]}))))
+            [:response-promise update-cities-from-json]}))))
 
 (describe "handle-get-cities-click"
   (with-stubs)
