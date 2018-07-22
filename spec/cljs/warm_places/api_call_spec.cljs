@@ -16,7 +16,7 @@
 (describe "Creating API query"
   (it "builds a query string"
     (should=
-      "http://api.geonames.org/findNearbyPlaceNameJSON?lat=50.058144&lng=19.959547&cities=cities1000&radius=100&username=kotaur"
+      "http://api.geonames.org/findNearbyPlaceNameJSON?maxRows=20&lat=50.058144&lng=19.959547&cities=cities5000&radius=100&username=kotaur"
       (api-url 50.058144 19.959547 100))))
 
 (def response-json
@@ -41,7 +41,7 @@
       (should-have-invoked
         :fetch-stub
         {:with
-          ["http://api.geonames.org/findNearbyPlaceNameJSON?lat=100&lng=200&cities=cities1000&radius=50&username=kotaur"]})))
+          ["http://api.geonames.org/findNearbyPlaceNameJSON?maxRows=20&lat=100&lng=200&cities=cities5000&radius=50&username=kotaur"]})))
 
     (it "calls extract-data with result of fetch and passed in callback"
       (with-redefs [
