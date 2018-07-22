@@ -11,21 +11,28 @@
       <img src="public/logo.png" id="logo">
 
   <div id="input-box">
-    1. Enter the Latitude:
-    <input type="number" name="latitude" class="form_field" id="latitude" placeholder="51.509865"><i class="far fa-question-circle" onClick="alert('To learn any coordinates visit: https://www.maps.ie/coordinates.html. Default coordinates are of London city.')"></i><br>
-    2. Enter the Longitude:
-    <input type="number" name="longitude" class="form_field" id="longitude" placeholder="-0.118092"><i class="far fa-question-circle" onClick="alert('To learn any coordinates visit: https://www.maps.ie/coordinates.html. Default coordinates are of London city.')"></i><br>
-    3. Enter the radius of interest:
-    <input type="number" name="radius" class="form_field" id="radius" placeholder="20">kilometers <br>
+    1. Latitude:
+    <input type="number" name="latitude" class="form_field" id="latitude" placeholder="51.509865"><i class="far fa-question-circle tooltip"> <span class="tooltiptext">To learn any coordinates visit <a href="https://www.maps.ie/coordinates.html">this </a> website. Default coordinates are of London.</span>
+</i><br>
+    2. Longitude:
+    <input type="number" name="longitude" class="form_field" id="longitude" placeholder="-0.118092"><i class="far fa-question-circle tooltip"> <span class="tooltiptext">To learn any coordinates visit <a href="https://www.maps.ie/coordinates.html">this </a> website. Default coordinates are of London.</span></i><br>
+    3. Radius:
+    <input type="number" name="radius" class="form_field" id="radius" placeholder="20">kilometers <i class="far fa-question-circle tooltip"> <span class="tooltiptext">Radius of search.</span></i><br>
     <button name="submit" id="submit">Find cities</button>
   </div>
   <div id="boxes">
-    <ul id="cities" class="list-box">
-      <p1> All cities: </p1>
-    </ul>
-    <ul id="wishlist" class="list-box">
-      <p1> Wish List: </p1>
-    </ul>
+    <div id="city-container" class="list-box">
+      <div id="box-description"> All cities </div>
+      <ul id="cities">
+      </ul>
+    </div>
+    <div id="wishlist-container" class="list-box">
+      <div id="box-description"> Wish List </div>
+      <ul id="wishlist">
+      </ul>
+    </div>
   </div>
-    </body>
+  <div id="footer">This website was created by <a href="www.github.com/Kotauror/warm_places">@Kotauror</a> as a part of apprenticeship @<a href="https://8thlight.com/">8th Light</a>. API used: <a href=" http://www.geonames.org/">GeoNames</a>, graphic: wikicommons.
+  </div>
+</body>
 </html>

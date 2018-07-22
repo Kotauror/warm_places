@@ -7,6 +7,11 @@ html {
   background-attachment: fixed;
 }
 
+#logo {
+  padding-top: 0.5em;
+  padding-left: 0.5em;
+}
+
 #input-box {
   text-align: center;
   width: fit-content;
@@ -51,33 +56,85 @@ html {
 }
 
 .list-box {
-  min-height: 15em;
+  height: 18em;
   width: 48%;
   padding-top: 1em;
-  border-color: #949494;
-  border-style: solid;
-  border-width: 0.05em;
   padding-bottom: 2em;
 }
 
-#cities {
-  background-color: #e8e8e8eb;
+#city-container {
+  background-color: #e2e2e254;
   margin-right: 2%;
 }
 
-#wishlist {
-  background-color: #e3ffd5eb;
+#cities {
+  overflow-y: scroll;
+  height: 15em;
+}
+
+#wishlist-container {
+  background-color: #ffbab363;
   margin-left: 2%;
 }
 
-p1 {
+#wishlist {
+  overflow-y: scroll;
+  height: 15em;
+}
+
+#box-description {
   font-size: 1.2em;
   display: block;
   margin-left: auto;
   margin-right: auto;
-  padding-bottom: 2em;
+  margin-bottom: 2em;
+  text-align: center;
 }
 
 li {
   padding: 0.25em;
+}
+
+.tooltip {
+    position: relative;
+    display: inline-block;
+}
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: inherit;
+    min-width: 150px;
+    padding: 0.5em;
+    background-color: white;
+    text-align: center;
+    font-family: Roboto;
+    border-radius: 6px;
+    border-color: black;
+    border-style: solid;
+    border-width: 0.05em;
+    left: 105%;
+    top: -5px;
+
+    position: absolute;
+    z-index: 1;
+}
+
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+}
+
+#footer {
+  padding-bottom: 0.3em;
+  text-align: center;
+  width: 450px;
+  bottom: 0px;
+  margin: auto;
+  margin-top: 3em;
+  display: block;
+  font-size: 0.8em;
+  vertical-align: middle;
+}
+
+a:link {
+  text-decoration: none;
 }
