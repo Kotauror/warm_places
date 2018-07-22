@@ -1,16 +1,83 @@
+html {
+  font-family: Roboto;
+  background-image: url(maaap.png);
+  background-position: middle;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+#input-box {
+  text-align: center;
+  width: fit-content;
+  padding: 1em;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: #fffffff2;
+  border-color: #949494;
+  border-style: solid;
+  border-width: 0.05em;
+}
+
+.form_field {
+  margin-top: 0.2em;
+  margin-bottom: 1.3em;
+  margin-right: 0.5em;
+}
+
+#radius {
+  width: 4em;
+}
+
+#submit {
+  height: 2em;
+  border-radius: 10em;
+  width: 12em;
+  font-size: 0.8em;
+  background: none;
+  border-color: #949494;
+}
+
+#logo {
+  height: 3em;
+}
+
 #boxes {
+  margin-top: 2em;
   display: flex;
-  width: 100%;
+  width: 80%;
+  margin-left: 10%;
+  margin-right: 10%;
+}
+
+.list-box {
+  min-height: 15em;
+  width: 48%;
+  padding-top: 1em;
+  border-color: #949494;
+  border-style: solid;
+  border-width: 0.05em;
+  padding-bottom: 2em;
 }
 
 #cities {
-  background-color: grey;
-  min-height: 15em;
-  width: 50%;
+  background-color: #e8e8e8eb;
+  margin-right: 2%;
 }
 
 #wishlist {
-  background-color: green;
-  min-height: 15em;
-  width: 50%;
+  background-color: #e3ffd5eb;
+  margin-left: 2%;
+}
+
+p1 {
+  font-size: 1.2em;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  padding-bottom: 2em;
+}
+
+li {
+  padding: 0.25em;
 }
