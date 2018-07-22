@@ -2,6 +2,7 @@
 <html>
     <head>
       <title>ClojureScript Hello Browser</title>
+      <link rel="stylesheet" type="text/css" href="public/general.css">
     </head>
     <body>
       <script action="src/cljs/warm_places/core.cljs" type="text/javascript" src="js/warm_places.js"></script>
@@ -13,7 +14,11 @@
         Radius of interest:
         <input type="number" name="radius" id="radius" placeholder="10"><br>
         <button name="submit" id="submit">Get cities</button>
-        <ul id="cities">
-        </ul>
+        <div id="boxes">
+          <ul id="cities">
+          </ul>
+          <ul id="wishlist">
+          </ul>
+        </div>
     </body>
 </html>
