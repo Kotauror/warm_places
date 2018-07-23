@@ -22,24 +22,23 @@
       "Cambridge"
       (.-textContent (.item (.querySelectorAll js/document "li") 0)))))
 
-
-  ; (it "decreases the number of cities when clicked"
-  ;  (let [cities-list-element (.createElement js/document "ul")]
-  ;  (.setAttribute cities-list-element "id" "cities")
-  ;  (.appendChild (.-body js/document) cities-list-element))
-  ;  (update-cities-in-dom ["Cambridge" "London"])
+(describe "on-click-wrapper"
+  (with-stubs) 
+  (it "shows the right number of cities when clicked"
+    (with-redefs [ 
+      handle-click-in-cities (stub :handle-click-in-cities-stub)
+      get-cities (stub :get-cities-stub {:return ["Cambridge"]})
+    ]
+    (let [cities-list-element (.createElement js/document "ul")]
+    (.setAttribute cities-list-element "id" "cities")
+    (.appendChild (.-body js/document) cities-list-element))
     
-   ; (on-click-wrapper "Cambridge")
+    (on-click-wrapper "Cambridge")
+   
+     (should=
+       1
+        (.-length (.querySelectorAll js/document "li"))))))
 
-;    (should=
- ;     2
-  ;    (.-length (.querySelectorAll js/document "li")))
-
-   ;  (on-click-wrapper ["Cambridge"])
-
-   ;  (should=
-    ;  1
-     ; (.-length (.querySelectorAll js/document "li")))))
 
 
 

@@ -6,7 +6,9 @@
 
 (defn on-click-wrapper [city]
   (handle-click-in-cities city)
-  (update-cities-in-dom (get-cities)))
+  (update-cities-in-dom (get-cities))
+  ;(add-city-to-wish-list-dom city)
+)
 
 (defn add-city-to-dom-list [city]
   (let [li-node (.createElement js/document "li")
