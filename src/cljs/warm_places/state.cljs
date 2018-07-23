@@ -21,14 +21,14 @@
   (swap! cities (fn [] new-cities)))
 
 (defn add-to-wishlist [city]
-  (swap! wishlist conj (first city)))
+  (swap! wishlist conj city))
 
 (defn remove-city-from-cities [city]
-  (swap! cities (partial remove #{(first city)})))
+  (swap! cities (partial remove #{city})))
 
 (defn handle-click-in-cities [city] 
-  (add-to-wishlist [city])
-  (remove-city-from-cities [city]))
+  (add-to-wishlist city)
+  (remove-city-from-cities city))
 
 (defn get-cities []
    @cities)
