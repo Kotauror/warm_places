@@ -16,6 +16,9 @@
         (.appendChild (.getElementById js/document "cities") li-node)))
 
 (defn update-cities-in-dom [list-of-cities]
+  (-> (.getElementById js/document "cities")
+    (.-innerHTML)
+    (set! ""))
   (mapv add-city-to-dom-list list-of-cities))
 
 ;; later:
