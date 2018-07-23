@@ -5,7 +5,7 @@
                                       update-latitude
                                       update-radius
                                       update-cities-state
-                                      update-wishlist-state
+                                      add-to-wishlist
                                       longitude
                                       latitude
                                       radius
@@ -37,11 +37,10 @@
     ["Krakow" "Warszawa"]
     @cities))
 
-  (it "updates wishlist atom"
-    (update-wishlist-state ["Warszawa"])
-    (update-wishlist-state ["Krakow"])
+  (it "adds element to a wishlist"
+    (add-to-wishlist ["Warszawa"])
+    (add-to-wishlist ["Krakow"])
     (should=
     ["Warszawa" "Krakow"]
     @wishlist))
-
 )
