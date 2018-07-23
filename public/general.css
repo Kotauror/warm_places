@@ -10,6 +10,7 @@ html {
 #logo {
   padding-top: 0.5em;
   padding-left: 0.5em;
+  width: 4em;
 }
 
 #input-box {
@@ -43,58 +44,6 @@ html {
   border-color: #949494;
 }
 
-#logo {
-  height: 3em;
-}
-
-#boxes {
-  margin-top: 2em;
-  display: flex;
-  width: 80%;
-  margin-left: 10%;
-  margin-right: 10%;
-}
-
-.list-box {
-  height: 18em;
-  width: 48%;
-  padding-top: 1em;
-  padding-bottom: 2em;
-}
-
-#city-container {
-  background-color: #e2e2e254;
-  margin-right: 2%;
-}
-
-#cities {
-  overflow-y: scroll;
-  height: 15em;
-}
-
-#wishlist-container {
-  background-color: #ffbab363;
-  margin-left: 2%;
-}
-
-#wishlist {
-  overflow-y: scroll;
-  height: 15em;
-}
-
-#box-description {
-  font-size: 1.2em;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: 2em;
-  text-align: center;
-}
-
-li {
-  padding: 0.25em;
-}
-
 .tooltip {
     position: relative;
     display: inline-block;
@@ -126,9 +75,11 @@ li {
 #footer {
   padding-bottom: 0.3em;
   text-align: center;
-  width: 450px;
+  position: absolute;
+  width: 30%;
   bottom: 0px;
-  margin: auto;
+  margin-right: 40%;
+  margin-left: 40%;
   margin-top: 3em;
   display: block;
   font-size: 0.8em;
