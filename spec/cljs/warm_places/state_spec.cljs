@@ -5,6 +5,7 @@
                                       update-latitude
                                       update-radius
                                       update-cities-state
+                                      remove-city-from-cities
                                       add-to-wishlist
                                       longitude
                                       latitude
@@ -43,4 +44,11 @@
     (should=
     ["Warszawa" "Krakow"]
     @wishlist))
+
+  (it "removes element from cities atom"
+    (update-cities-state ["Krakow" "Warszawa"])
+    (remove-city-from-cities ["Krakow"])
+    (should=
+    ["Warszawa"]
+    @cities))
 )
