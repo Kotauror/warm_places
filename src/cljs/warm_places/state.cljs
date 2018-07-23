@@ -29,3 +29,6 @@
 (defn handle-click-in-cities [city] 
   (add-to-wishlist city)
   (remove-city-from-cities city))
+
+(defn get-cities []
+ @cities)

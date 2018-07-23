@@ -8,6 +8,7 @@
                                       remove-city-from-cities
                                       handle-click-in-cities
                                       add-to-wishlist
+                                      get-cities
                                       longitude
                                       latitude
                                       radius
@@ -67,3 +68,11 @@
     :add-to-wishlist-stub
     :remove-city-from-cities-stub))))
 
+(describe "get-cities" 
+  (it "returns cities"
+
+  (update-cities-state ["Krakow" "Warszawa"]) 
+
+  (should= 
+  ["Krakow" "Warszawa"]
+  (get-cities))))
