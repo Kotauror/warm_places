@@ -63,7 +63,7 @@
   ]
   (update-cities-state ["London" "Paris"])
 
-  (handle-click-in-cities "London")
+  (handle-click-in-cities "Krakow")
   
   (should-have-invoked 
     :add-to-wishlist-stub
