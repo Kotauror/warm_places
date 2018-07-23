@@ -24,5 +24,8 @@
   (swap! wishlist conj (first city)))
 
 (defn remove-city-from-cities [city]
-  (js/console.log (first city))
   (swap! cities (partial remove #{(first city)})))
+
+(defn handle-click-in-cities [city] 
+  (add-to-wishlist city)
+  (remove-city-from-cities city))

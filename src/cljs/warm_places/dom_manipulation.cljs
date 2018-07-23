@@ -1,4 +1,5 @@
-(ns warm_places.dom_manipulation)
+(ns warm_places.dom_manipulation
+  (:require [warm_places.state :refer [handle-click-in-cities]]))
 
 (enable-console-print!)
 
@@ -6,7 +7,7 @@
   (let [li-node (.createElement js/document "li")
         text-node (.createTextNode js/document city)]
         (.appendChild li-node text-node)
-        ; (.addEventListener li-node "click") ;;delete from main add to wish)
+        (.addEventListener li-node "click" (fn [] (handle-click-in-cities city)))
         (.appendChild (.getElementById js/document "cities") li-node)))
 
 (defn update-cities-in-dom [list-of-cities]

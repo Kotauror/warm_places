@@ -1,11 +1,12 @@
 (ns warm_places.state-spec
-  (:require-macros [speclj.core :refer [describe it should=]])
+  (:require-macros [speclj.core :refer [describe it should= stub with-stubs should-have-invoked]])
   (:require [speclj.core]
             [warm_places.state :refer [update-longitude
                                       update-latitude
                                       update-radius
                                       update-cities-state
                                       remove-city-from-cities
+                                      handle-click-in-cities
                                       add-to-wishlist
                                       longitude
                                       latitude
@@ -50,5 +51,19 @@
     (remove-city-from-cities ["Krakow"])
     (should=
     ["Warszawa"]
-    @cities))
-)
+    @cities)))
+
+(describe "handle-click-in-cities" 
+  (with-stubs) 
+  (it "calls right methods" 
+  (with-redefs [
+    add-to-wishlist (stub :add-to-wishlist-stub)
+    remove-city-from-cities (stub :remove-city-from-cities-stub)
+  ]
+
+  (handle-click-in-cities "Krakow")
+  
+  (should-have-invoked 
+    :add-to-wishlist-stub
+    :remove-city-from-cities-stub))))
+
