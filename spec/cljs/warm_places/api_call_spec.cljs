@@ -9,7 +9,7 @@
                                           get-city-names
                                           handle-get-cities-click
                                           update-cities-from-json]]
-            [warm_places.dom_manipulation :refer [update-dom]]
+            [warm_places.dom_manipulation :refer [update-cities-in-dom]]
             [warm_places.state :refer [update-cities-state
                                        cities]]))
 
@@ -74,7 +74,7 @@
   (with-stubs)
   (it "gets cities from JSON and updates cities atom"
     (with-redefs [
-      update-dom (stub :update-dom-stub)
+      update-cities-in-dom (stub :update-cities-in-dom-stub)
       ]
 
       (update-cities-from-json response-json)

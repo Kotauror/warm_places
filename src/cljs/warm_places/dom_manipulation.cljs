@@ -9,7 +9,7 @@
         ; (.addEventListener li-node "click") ;;delete from main add to wish)
         (.appendChild (.getElementById js/document "cities") li-node)))
 
-(defn update-dom [list-of-cities]
+(defn update-cities-in-dom [list-of-cities]
   (mapv add-city-to-dom-list list-of-cities))
 
 ;; later:
