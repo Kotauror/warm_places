@@ -61,8 +61,9 @@
     add-to-wishlist (stub :add-to-wishlist-stub)
     remove-city-from-cities (stub :remove-city-from-cities-stub)
   ]
+  (update-cities-state ["London" "Paris"])
 
-  (handle-click-in-cities "Krakow")
+  (handle-click-in-cities "London")
   
   (should-have-invoked 
     :add-to-wishlist-stub

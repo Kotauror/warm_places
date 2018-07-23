@@ -27,8 +27,8 @@
   (swap! cities (partial remove #{(first city)})))
 
 (defn handle-click-in-cities [city] 
-  (add-to-wishlist city)
-  (remove-city-from-cities city))
+  (add-to-wishlist [city])
+  (remove-city-from-cities [city]))
 
 (defn get-cities []
- @cities)
+   @cities)
