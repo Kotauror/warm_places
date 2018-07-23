@@ -5,10 +5,12 @@
                                       update-latitude
                                       update-radius
                                       update-cities-state
+                                      update-wishlist-state
                                       longitude
                                       latitude
                                       radius
-                                      cities]]))
+                                      cities
+                                      wishlist]]))
 
 (describe "update atoms"
   (it "updates latitude atom"
@@ -33,4 +35,13 @@
     (update-cities-state ["Krakow" "Warszawa"])
     (should=
     ["Krakow" "Warszawa"]
-    @cities)))
+    @cities))
+
+  (it "updates wishlist atom"
+    (update-wishlist-state ["Warszawa"])
+    (update-wishlist-state ["Krakow"])
+    (should=
+    ["Warszawa" "Krakow"]
+    @wishlist))
+
+)
