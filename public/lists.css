@@ -1,0 +1,54 @@
+#boxes {
+  margin-top: 3em;
+  display: flex;
+  width: 80%;
+  margin-left: 10%;
+  margin-right: 10%;
+}
+
+.list-box {
+  height: 20em;
+  width: 48%;
+  padding-top: 1em;
+  padding-bottom: 2em;
+}
+
+#city-container {
+  background-color: #e2e2e254;
+  margin-right: 2%;
+}
+
+#cities {
+  overflow-y: scroll;
+  height: 15em;
+}
+
+#wishlist-container {
+  background-color: #ffbab363;
+  margin-left: 2%;
+}
+
+#wishlist {
+  overflow-y: scroll;
+  height: 15em;
+}
+
+#box-description {
+  font-size: 1.2em;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 2em;
+  text-align: center;
+}
+
+li {
+  padding: 0.25em;
+}
+
+#click-info {
+  font-size: 0.7em;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}

@@ -9,13 +9,14 @@
                                           get-city-names
                                           handle-get-cities-click
                                           update-cities-from-json]]
+            [warm_places.dom_manipulation :refer [update-cities-in-dom]]
             [warm_places.state :refer [update-cities-state
                                        cities]]))
 
 (describe "Creating API query"
   (it "builds a query string"
     (should=
-      "http://api.geonames.org/findNearbyPlaceNameJSON?lat=50.058144&lng=19.959547&cities=cities1000&radius=100&username=kotaur"
+      "http://api.geonames.org/findNearbyPlaceNameJSON?maxRows=20&lat=50.058144&lng=19.959547&cities=cities5000&radius=100&username=kotaur"
       (api-url 50.058144 19.959547 100))))
 
 (def response-json
@@ -40,7 +41,7 @@
       (should-have-invoked
         :fetch-stub
         {:with
-          ["http://api.geonames.org/findNearbyPlaceNameJSON?lat=100&lng=200&cities=cities1000&radius=50&username=kotaur"]})))
+          ["http://api.geonames.org/findNearbyPlaceNameJSON?maxRows=20&lat=100&lng=200&cities=cities5000&radius=50&username=kotaur"]})))
 
     (it "calls extract-data with result of fetch and passed in callback"
       (with-redefs [
@@ -70,10 +71,14 @@
           [100 200 50 update-cities-from-json]}))))
 
 (describe "Update-cities-from-json"
+  (with-stubs)
   (it "gets cities from JSON and updates cities atom"
+    (with-redefs [
+      update-cities-in-dom (stub :update-cities-in-dom-stub)
+      ]
 
-  (update-cities-from-json response-json)
+      (update-cities-from-json response-json)
 
-  (should=
-    ["Krakow" "Warszawa"]
-    @cities)))
+      (should=
+        ["Krakow" "Warszawa"]
+        @cities))))

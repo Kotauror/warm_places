@@ -1,10 +1,12 @@
 (ns warm_places.api_call
-  (:require [warm_places.state :refer [update-cities-state]]))
+  (:require [warm_places.state :refer [update-cities-state
+                                      get-cities]]
+            [warm_places.dom_manipulation :refer [update-cities-in-dom]]))
 
 (enable-console-print!)
 
 (defn api-url [latitude longitude radius]
- (str "http://api.geonames.org/findNearbyPlaceNameJSON?lat=" latitude "&lng=" longitude "&cities=cities1000&radius=" radius "&username=kotaur"))
+ (str "http://api.geonames.org/findNearbyPlaceNameJSON?maxRows=20&lat=" latitude "&lng=" longitude "&cities=cities5000&radius=" radius "&username=kotaur"))
 
 (defn- get-city-name [city-data]
   (.-toponymName city-data))
@@ -17,7 +19,8 @@
 (defn update-cities-from-json [json]
   (-> json
     (get-city-names)
-    (update-cities-state)))
+    (update-cities-state))
+  (update-cities-in-dom (get-cities)))
 
 ;untested
 (defn fetch [url]

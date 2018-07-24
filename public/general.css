@@ -1,0 +1,89 @@
+html {
+  font-family: Roboto;
+  background-image: url(maaap.png);
+  background-position: middle;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+#logo {
+  padding-top: 0.5em;
+  padding-left: 0.5em;
+  width: 10%;
+}
+
+#input-box {
+  text-align: center;
+  width: fit-content;
+  padding: 1em;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: #fffffff2;
+  border-color: #949494;
+  border-style: solid;
+  border-width: 0.05em;
+}
+
+.form_field {
+  margin-top: 0.2em;
+  margin-bottom: 1.3em;
+  margin-right: 0.5em;
+}
+
+#radius {
+  width: 4em;
+}
+
+#submit {
+  height: 2em;
+  border-radius: 10em;
+  width: 12em;
+  font-size: 0.8em;
+  background: none;
+  border-color: #949494;
+}
+
+.tooltip {
+    position: relative;
+    display: inline-block;
+}
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: inherit;
+    min-width: 150px;
+    padding: 0.5em;
+    background-color: white;
+    text-align: center;
+    font-family: Roboto;
+    border-radius: 6px;
+    border-color: black;
+    border-style: solid;
+    border-width: 0.05em;
+    left: 105%;
+    top: -5px;
+
+    position: absolute;
+    z-index: 1;
+}
+
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+}
+
+#footer {
+  padding-bottom: 0.3em;
+  text-align: center;
+  position: absolute;
+  width: 100%;
+  bottom: 0px;
+  margin-top: 3em;
+  display: block;
+  font-size: 0.8em;
+  vertical-align: middle;
+}
+
+a:link {
+  text-decoration: none;
+}
