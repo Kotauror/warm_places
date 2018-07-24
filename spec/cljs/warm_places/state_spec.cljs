@@ -10,6 +10,7 @@
                                       reset-vector-atom
                                       add-to-wishlist
                                       get-cities
+                                      get-wishlist
                                       longitude
                                       latitude
                                       radius
@@ -86,3 +87,14 @@
   (should= 
   ["Krakow" "Warszawa"]
   (get-cities))))
+
+(describe "get-wihlist" 
+  (it "returns wishlist"
+  (reset-vector-atom wishlist)
+
+  (add-to-wishlist "Krakow") 
+
+  (should= 
+  ["Krakow"]
+  (get-wishlist))))
+

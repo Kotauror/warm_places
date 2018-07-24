@@ -33,5 +33,8 @@
 (defn get-cities []
    @cities)
 
+(defn get-wishlist [] 
+  @wishlist)
+
 (defn reset-vector-atom [vector-atom] 
   (reset! vector-atom []))
