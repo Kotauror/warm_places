@@ -24,30 +24,24 @@
       (.-textContent (.item (.querySelectorAll cities-list-element "li") 0))))))
 
 (describe "on-click-wrapper"
-  (it "shows the right number of cities in cities list when city is clicked"
-    (let [cities-list-element (.createElement js/document "ul")]
+  (it "after click shows the right number of cities in cities and wishlist"
+    (let [cities-list-element (.createElement js/document "ul")
+          wishlist-list-element (.createElement js/document "ul")]
     (.setAttribute cities-list-element "id" "cities")
-    (.appendChild (.-body js/document) cities-list-element)
-    (update-cities-state ["Cambridge"])
-
-    (on-click-wrapper "Cambridge")
-   
-     (should=
-       0
-        (.-length (.querySelectorAll cities-list-element "li")))))
-
-  (it "shows the right number of cities in wishlist list when city is clicked"
-    (let [wishlist-list-element (.createElement js/document "ul")]
     (.setAttribute wishlist-list-element "id" "wishlist")
+    (.appendChild (.-body js/document) cities-list-element)
     (.appendChild (.-body js/document) wishlist-list-element)
     (update-cities-state ["Cambridge"])
 
     (on-click-wrapper "Cambridge")
    
      (should=
+       0
+        (.-length (.querySelectorAll cities-list-element "li")))
+     
+    (should=
        1
-        (.-length (.querySelectorAll wishlist-list-element "li")))))
-)
+        (.-length (.querySelectorAll wishlist-list-element "li"))))))
 
 
 
