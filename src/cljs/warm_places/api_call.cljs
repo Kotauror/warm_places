@@ -19,6 +19,9 @@
     (.-geonames)
     (mapv get-city-name)))
 
+(defn get-temperature [json]
+  (str (.-temp (.-main json))))
+
 (defn update-cities-from-json [json]
   (-> json
     (get-city-names)
