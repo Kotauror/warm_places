@@ -11,30 +11,45 @@
   (it "puts list of cities to the container"
     (let [cities-list-element (.createElement js/document "ul")]
     (.setAttribute cities-list-element "id" "cities")
-    (.appendChild (.-body js/document) cities-list-element))
+    (.appendChild (.-body js/document) cities-list-element)
 
     (update-cities-in-dom ["Cambridge" "London"])
 
     (should=
       2
-      (.-length (.querySelectorAll js/document "li")))
+      (.-length (.querySelectorAll cities-list-element "li")))
 
     (should=
       "Cambridge"
-      (.-textContent (.item (.querySelectorAll js/document "li") 0)))))
+      (.-textContent (.item (.querySelectorAll cities-list-element "li") 0))))))
 
 (describe "on-click-wrapper"
-  (it "shows the right number of cities when clicked"
+  (it "shows the right number of cities in cities list when clicked"
     (let [cities-list-element (.createElement js/document "ul")]
     (.setAttribute cities-list-element "id" "cities")
-    (.appendChild (.-body js/document) cities-list-element))
+    (.appendChild (.-body js/document) cities-list-element)
     (update-cities-state ["Cambridge"])
 
     (on-click-wrapper "Cambridge")
    
      (should=
        0
-        (.-length (.querySelectorAll js/document "li")))))
+        (.-length (.querySelectorAll cities-list-element "li")))))
+
+;  (it "shows the right number of cities in wishlist list when clicked"
+ ;   (let [wishlist-list-element (.createElement js/document "ul")]
+  ;  (.setAttribute wishlist-list-element "id" "wishlist")
+   ; (.appendChild (.-body js/document) wishlist-list-element))
+   ; (update-cities-state ["Cambridge"])
+
+    ;(on-click-wrapper "Cambridge")
+   
+     ;(should=
+      ; 1
+       ; (.-length (.querySelectorAll wishlist-list-element "li"))))
+
+
+)
 
 
 
