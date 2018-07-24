@@ -7,7 +7,7 @@
                                        update-latitude
                                        update-radius
                                       ]]
-            [warm_places.api_call :refer [call-api handle-get-cities-click]]))
+            [warm_places.api_call :refer [call-geonames-api handle-get-cities-click]]))
 
 (enable-console-print!)
 

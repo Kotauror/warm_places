@@ -1,10 +1,11 @@
 (ns warm_places.api_call-
   (:require-macros [speclj.core :refer [describe it should= stub with-stubs should-have-invoked]])
   (:require [speclj.core]
-            [warm_places.api_call :refer [api-url
+            [warm_places.api_call :refer [geonames-api-url
+                                          weather-api-url
                                           fetch
                                           extract-data
-                                          call-api
+                                          call-geonames-api
                                           get-city-name
                                           get-city-names
                                           handle-get-cities-click
@@ -13,11 +14,17 @@
             [warm_places.state :refer [update-cities-state
                                        cities]]))
 
-(describe "Creating API query"
+(describe "geonames-api-url"
   (it "builds a query string"
     (should=
       "http://api.geonames.org/findNearbyPlaceNameJSON?maxRows=20&lat=50.058144&lng=19.959547&cities=cities5000&radius=100&username=kotaur"
-      (api-url 50.058144 19.959547 100))))
+      (geonames-api-url 50.058144 19.959547 100))))
+
+(describe "weather-api-url"
+  (it "builds a query string"
+    (should=
+    "http://api.openweathermap.org/data/2.5/weather?q=London&appid=48e7a56793fa02078630b7e07b5342ad"
+      (weather-api-url "London"))))
 
 (def response-json
   (.parse js/JSON "{\"geonames\":[{\"toponymName\": \"Krakow\"}, {\"toponymName\": \"Warszawa\"}]}"))
@@ -28,7 +35,7 @@
       ["Krakow" "Warszawa"]
       (get-city-names response-json))))
 
-(describe "call-api"
+(describe "call-geonames-api"
   (with-stubs)
   (it "calls fetch with correct URL"
     (with-redefs [
@@ -36,7 +43,7 @@
       extract-data (stub :extract-data-stub)
     ]
 
-      (call-api 100 200 50 :callback)
+      (call-geonames-api 100 200 50 :callback)
 
       (should-have-invoked
         :fetch-stub
@@ -49,7 +56,7 @@
         extract-data (stub :extract-data-stub)
       ]
 
-        (call-api 100 200 50 :callback)
+        (call-geonames-api 100 200 50 :callback)
 
         (should-have-invoked
           :extract-data-stub
@@ -58,15 +65,15 @@
 
 (describe "handle-get-cities-click"
   (with-stubs)
-  (it "calls call-api with given values and update-cities-from-json"
+  (it "calls call-geonames-api with given values and update-cities-from-json"
     (with-redefs [
-      call-api (stub :call-api-stub)
+      call-geonames-api (stub :call-geonames-api-stub)
       ]
 
       (handle-get-cities-click 100 200 50)
 
       (should-have-invoked
-        :call-api-stub
+        :call-geonames-api-stub
         {:with
           [100 200 50 update-cities-from-json]}))))
 

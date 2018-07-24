@@ -5,10 +5,13 @@
 
 (enable-console-print!)
 
-(defn api-url [latitude longitude radius]
+(defn geonames-api-url [latitude longitude radius]
  (str "http://api.geonames.org/findNearbyPlaceNameJSON?maxRows=20&lat=" latitude "&lng=" longitude "&cities=cities5000&radius=" radius "&username=kotaur"))
 
-(defn- get-city-name [city-data]
+(defn weather-api-url [city] 
+  (str "http://api.openweathermap.org/data/2.5/weather?q=" city "&appid=48e7a56793fa02078630b7e07b5342ad"))
+
+(defn get-city-name [city-data]
   (.-toponymName city-data))
 
 (defn get-city-names [json]
@@ -34,10 +37,10 @@
 (defn extract-data [response-promise callback]
   (.then response-promise #(use-json %1 callback)))
 
-(defn call-api [latitude longitude radius callback]
-  (-> (api-url latitude longitude radius)
+(defn call-geonames-api [latitude longitude radius callback]
+  (-> (geonames-api-url latitude longitude radius)
     (fetch)
     (extract-data callback)))
 
 (defn handle-get-cities-click [latitude longitude radius]
- (call-api latitude longitude radius update-cities-from-json))
+ (call-geonames-api latitude longitude radius update-cities-from-json))
