@@ -30,22 +30,16 @@
         (.addEventListener li-node "click" #(function city))
         (.appendChild (.getElementById js/document container-name) li-node)))
 
-(defn add-city-to-dom-list [city]
+(defn add-city-to-cities-ul [city]
   (add-element-to-dom city "cities" click-in-cities-wrapper))
 
-(defn add-city-to-wishlist-dom-list [city] 
+(defn add-city-to-wishlist-ul [city] 
   (add-element-to-dom city "wishlist" click-in-wishlist-wrapper))
 
 (defn update-cities-in-dom [list-of-cities]
   (clean-list "cities")
-  (mapv add-city-to-dom-list list-of-cities))
+  (mapv add-city-to-cities-ul list-of-cities))
 
 (defn update-wishlist-in-dom [list-of-cities-in-wishlist] 
   (clean-list "wishlist")
-  (mapv add-city-to-wishlist-dom-list list-of-cities-in-wishlist))
-
-
-;; later:
-;; pass to add-city-to-dom-list method of line 9 and contener from line 10.
-
-;;rerender :D deletes stuff and rerender from atoms.
+  (mapv add-city-to-wishlist-ul list-of-cities-in-wishlist))
