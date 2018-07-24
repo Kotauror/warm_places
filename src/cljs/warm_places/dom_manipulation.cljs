@@ -11,6 +11,11 @@
   (update-wishlist-in-dom (get-wishlist))
 )
 
+(defn clean-list [list-name] 
+  (-> (.getElementById js/document list-name)
+    (.-innerHTML)
+    (set! "")))
+
 (defn add-city-to-dom-list [city]
   (let [li-node (.createElement js/document "li")
         text-node (.createTextNode js/document city)]
@@ -19,9 +24,7 @@
         (.appendChild (.getElementById js/document "cities") li-node)))
 
 (defn update-cities-in-dom [list-of-cities]
-  (-> (.getElementById js/document "cities")
-    (.-innerHTML)
-    (set! ""))
+  (clean-list "cities")
   (mapv add-city-to-dom-list list-of-cities))
 
 (defn add-city-to-wishlist-dom-list [city] 
@@ -32,9 +35,7 @@
       (.appendChild (.getElementById js/document "wishlist") li-node)))
 
 (defn update-wishlist-in-dom [list-of-cities-in-wishlist] 
-  (-> (.getElementById js/document "wishlist")
-    (.-innerHTML)
-    (set! ""))
+  (clean-list "wishlist")
   (mapv add-city-to-wishlist-dom-list list-of-cities-in-wishlist))
 
 
