@@ -7,6 +7,7 @@
                                       update-cities-state
                                       remove-element-from-atom
                                       handle-click-in-cities
+                                      handle-click-in-wishlist
                                       reset-vector-atom
                                       add-to-wishlist
                                       get-cities
@@ -77,6 +78,20 @@
   
   (should-have-invoked 
     :add-to-wishlist-stub
+    :remove-element-from-atom-stub))))
+
+(describe "handle-click-in-wishlist" 
+  (with-stubs) 
+  (it "calls right methods" 
+  (with-redefs [
+    remove-element-from-atom (stub :remove-element-from-atom-stub)
+  ]
+  (update-cities-state ["London" "Paris"])
+  (add-to-wishlist "London")
+
+  (handle-click-in-wishlist "London")
+  
+  (should-have-invoked 
     :remove-element-from-atom-stub))))
 
 (describe "get-cities" 

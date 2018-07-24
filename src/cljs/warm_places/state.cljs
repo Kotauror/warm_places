@@ -30,6 +30,9 @@
   (add-to-wishlist city)
   (remove-element-from-atom city cities))
 
+(defn handle-click-in-wishlist [city]
+  (remove-element-from-atom city wishlist))
+
 (defn get-cities []
    @cities)
 
