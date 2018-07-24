@@ -34,7 +34,7 @@
    
      (should=
        0
-        (.-length (.querySelectorAll js/document "li"))))))
+        (.-length (.querySelectorAll js/document "li")))))
 
 
 

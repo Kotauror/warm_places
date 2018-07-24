@@ -32,3 +32,6 @@
 
 (defn get-cities []
    @cities)
+
+(defn reset-vector-atom [vector-atom] 
+  (reset! vector-atom []))
