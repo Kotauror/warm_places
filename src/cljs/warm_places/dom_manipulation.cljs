@@ -6,17 +6,17 @@
 
 (enable-console-print!)
 
+(defn update-dom []
+  (update-cities-in-dom (get-cities))
+  (update-wishlist-in-dom (get-wishlist)))
+
 (defn click-in-cities-wrapper [city]
   (handle-click-in-cities city)
-  (update-cities-in-dom (get-cities))
-  (update-wishlist-in-dom (get-wishlist))
-)
+  (update-dom))
 
 (defn click-in-wishlist-wrapper [city]
   (handle-click-in-wishlist city)
-  (update-cities-in-dom (get-cities))
-  (update-wishlist-in-dom (get-wishlist))
-)
+  (update-dom))
 
 (defn clean-list [list-name] 
   (-> (.getElementById js/document list-name)
