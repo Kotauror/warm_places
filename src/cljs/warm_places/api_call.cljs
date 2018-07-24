@@ -8,9 +8,9 @@
 (defn geonames-api-url [latitude longitude radius]
  (str "http://api.geonames.org/findNearbyPlaceNameJSON?maxRows=20&lat=" latitude "&lng=" longitude "&cities=cities5000&radius=" radius "&username=kotaur"))
 
-(defn weather-api-url [city] 
-  (str "http://api.openweathermap.org/data/2.5/weather?q=" city "&units=metric&appid=48e7a56793fa02078630b7e07b5342ad"))
-
+;(defn weather-api-url [city] 
+;  (str "http://api.openweathermap.org/data/2.5/weather?q=" city "&units=metric&appid=48e7a56793fa02078630b7e07b5342ad"))
+;
 (defn get-city-name [city-data]
   (.-toponymName city-data))
 
@@ -19,8 +19,8 @@
     (.-geonames)
     (mapv get-city-name)))
 
-(defn get-temperature [json]
-  (str (.-temp (.-main json))))
+;(defn get-temperature [json]
+;  (str (.-temp (.-main json)))
 
 (defn update-cities-from-json [json]
   (-> json
