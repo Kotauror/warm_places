@@ -7,7 +7,7 @@
 }
 
 .list-box {
-  height: 18em;
+  height: 20em;
   width: 48%;
   padding-top: 1em;
   padding-bottom: 2em;
@@ -44,4 +44,11 @@
 
 li {
   padding: 0.25em;
+}
+
+#click-info {
+  font-size: 0.7em;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
 }
