@@ -23,7 +23,7 @@
 (describe "weather-api-url"
   (it "builds a query string"
     (should=
-    "http://api.openweathermap.org/data/2.5/weather?q=London&appid=48e7a56793fa02078630b7e07b5342ad"
+    "http://api.openweathermap.org/data/2.5/weather?q=London&units=metric&appid=48e7a56793fa02078630b7e07b5342ad"
       (weather-api-url "London"))))
 
 (def response-json
