@@ -5,3 +5,6 @@
 
 (defn get-temperature [json]
  (str (.-temp (.-main json))))
+
+(defn build-city-name [city temperature]
+  (str city ": " temperature "°C"))

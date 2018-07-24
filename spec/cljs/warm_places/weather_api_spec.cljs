@@ -2,8 +2,8 @@
   (:require-macros [speclj.core :refer [describe it should= stub with-stubs should-have-invoked]])
   (:require [speclj.core]
             [warm_places.weather_api :refer [weather-api-url
-                                            get-temperature]]))
-
+                                            get-temperature
+                                            build-city-name]]))
  (describe "weather-api-url"
     (it "builds a query string"
       (should=
@@ -19,3 +19,9 @@
       (should=
       "27.22"
       (get-temperature response-json-weather))))
+
+(describe "build-city-name"
+  (it "build city name from city toponym and temperature" 
+    (should=
+      "London: 30°C"
+      (build-city-name "London" "30")))) 
