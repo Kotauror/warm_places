@@ -5,7 +5,7 @@
                                       update-latitude
                                       update-radius
                                       update-cities-state
-                                      remove-city-from-cities
+                                      remove-element-from-atom
                                       handle-click-in-cities
                                       reset-vector-atom
                                       add-to-wishlist
@@ -50,9 +50,9 @@
     ["Warszawa" "Krakow"]
     @wishlist))
 
-  (it "removes element from cities atom"
+  (it "removes element from atom"
     (update-cities-state ["Krakow" "Warszawa"])
-    (remove-city-from-cities "Krakow")
+    (remove-element-from-atom "Krakow" cities)
     (should=
     ["Warszawa"]
     @cities))
@@ -69,7 +69,7 @@
   (it "calls right methods" 
   (with-redefs [
     add-to-wishlist (stub :add-to-wishlist-stub)
-    remove-city-from-cities (stub :remove-city-from-cities-stub)
+    remove-element-from-atom (stub :remove-element-from-atom-stub)
   ]
   (update-cities-state ["London" "Paris"])
 
@@ -77,7 +77,7 @@
   
   (should-have-invoked 
     :add-to-wishlist-stub
-    :remove-city-from-cities-stub))))
+    :remove-element-from-atom-stub))))
 
 (describe "get-cities" 
   (it "returns cities"

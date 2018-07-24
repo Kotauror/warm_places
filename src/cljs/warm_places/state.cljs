@@ -23,12 +23,12 @@
 (defn add-to-wishlist [city]
   (swap! wishlist conj city))
 
-(defn remove-city-from-cities [city]
-  (swap! cities (partial remove #{city})))
+(defn remove-element-from-atom [element atom]
+  (swap! atom (partial remove #{element})))
 
 (defn handle-click-in-cities [city] 
   (add-to-wishlist city)
-  (remove-city-from-cities city))
+  (remove-element-from-atom city cities))
 
 (defn get-cities []
    @cities)
