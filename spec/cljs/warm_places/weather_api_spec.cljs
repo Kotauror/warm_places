@@ -5,8 +5,6 @@
                                             extract-data]]
             [warm_places.weather_api :refer [get-city-string
                                             weather-api-url
-                                           ; fetch 
-                                            ;extract-data
                                             get-city-temperature-string]]))
  (describe "weather-api-url"
     (it "builds a query string"
@@ -28,12 +26,22 @@
     (with-stubs)
     (it "calls the right methods"
     (with-redefs [
-      weather-api-url (stub :weather-api-url-stub)
-      fetch (stub :fetch-stub)
+      weather-api-url (stub :weather-api-url-stub {:return :url})
+      fetch (stub :fetch-stub {:return :response-promise})
       extract-data (stub :extract-data-stub)
     ]
 
     (get-city-string "Krakow")
 
     (should-have-invoked
-      :weather-api-url-stub))))
+      :weather-api-url-stub)
+
+    (should-have-invoked
+      :fetch-stub
+      {:with
+        [:url]})
+
+    (should-have-invoked
+      :extract-data-stub
+      {:with
+        [:response-promise get-city-temperature-string]}))))
