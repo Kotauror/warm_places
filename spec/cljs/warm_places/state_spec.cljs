@@ -10,6 +10,7 @@
                                       handle-click-in-wishlist
                                       reset-vector-atom
                                       add-to-wishlist
+                                      add-to-cities
                                       get-cities
                                       get-wishlist
                                       longitude
@@ -50,6 +51,13 @@
     (should=
     ["Warszawa" "Krakow"]
     @wishlist))
+
+  (it "adds element to cities" 
+    (reset-vector-atom cities)
+    (add-to-cities "Krakow")
+    (should=
+    ["Krakow"]
+    @cities))
 
   (it "removes element from atom"
     (update-cities-state ["Krakow" "Warszawa"])
