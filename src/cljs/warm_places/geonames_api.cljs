@@ -1,5 +1,8 @@
-(ns warm_places.api_call
-  (:require [warm_places.state :refer [reset-vector-atom
+(ns warm_places.geonames_api
+  (:require [warm_places.general_api :refer [fetch
+                                            use-json
+                                            extract-data]]
+            [warm_places.state :refer [reset-vector-atom
                                       cities
                                       add-to-cities
                                       update-cities-state
@@ -21,11 +24,8 @@
     (mapv get-city-name)))
 
 (defn add-to-cities-list [city-promise]
-  (js/console.log "in add-to-cities-list" city-promise)
+;  (js/console.log "in add-to-cities-list" city-promise)
   (.then city-promise #(add-to-cities %1)))
-
-; (defn get-string [promise]
-  ;(.then promise (#add-to-cities %1))
 
 (defn update-cities-from-json [json]
   (reset-vector-atom cities)
@@ -36,20 +36,6 @@
     (mapv add-to-cities-list v)
     (.all js/Promise v)
     (.then v #(update-cities-in-dom (get-cities)))))
-  ; (.then (.all js/Promise) update-cities-state))
- ; (update-cities-in-dom (get-cities)))
-
-;untested
-(defn fetch [url]
-  (js/fetch url))
-
-;untested
-(defn use-json [response callback]
-  (.then (.json response) callback))
-
-;untested
-(defn extract-data [response-promise callback]
-  (.then response-promise #(use-json %1 callback)))
 
 (defn call-geonames-api [latitude longitude radius callback]
   (-> (geonames-api-url latitude longitude radius)

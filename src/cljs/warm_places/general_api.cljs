@@ -1,0 +1,10 @@
+(ns warm_places.general_api)
+
+(defn fetch [url]
+  (js/fetch url))
+
+(defn use-json [response callback]
+  (.then (.json response) callback))
+
+(defn extract-data [response-promise callback]
+  (.then response-promise #(use-json %1 callback)))
