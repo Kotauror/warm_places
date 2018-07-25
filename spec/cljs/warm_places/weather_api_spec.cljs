@@ -1,9 +1,11 @@
 (ns warm_places.weather_api-spec
   (:require-macros [speclj.core :refer [describe it should= stub with-stubs should-have-invoked]])
   (:require [speclj.core]
-            [warm_places.weather_api :refer [weather-api-url
-                                            get-temperature
-                                            build-city-name]]))
+            [warm_places.weather_api :refer [get-city-string
+                                            weather-api-url
+                                            fetch 
+                                            extract-data
+                                            get-city-temperature-string]]))
  (describe "weather-api-url"
     (it "builds a query string"
       (should=
@@ -17,11 +19,19 @@
 (describe "get-temperature"
     (it "returns temperature from JSON"
       (should=
-      "27.22"
-      (get-temperature response-json-weather))))
+      "Bawku: 27.22°C"
+      (get-city-temperature-string response-json-weather))))
 
-(describe "build-city-name"
-  (it "build city name from city toponym and temperature" 
-    (should=
-      "London: 30°C"
-      (build-city-name "London" "30")))) 
+(describe "get-city-string"
+    (with-stubs)
+    (it "calls the right methods"
+    (with-redefs [
+      weather-api-url (stub :weather-api-url-stub)
+      fetch (stub :fetch-stub)
+      extract-data (stub :extract-data-stub)
+    ]
+
+    (get-city-string "Krakow")
+
+    (should-have-invoked
+      :weather-api-url-stub))))
