@@ -1,19 +1,28 @@
 html {
-  font-family: Roboto;
+  font-family: monospace;
   background-image: url(maaap.png);
   background-position: middle;
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  height: 100%;
+  margin: 0;
 }
 
 #logo {
-  padding-top: 0.5em;
-  padding-left: 0.5em;
-  width: 10%;
+  padding-top: 1em;
+  padding-left: 1em;
+  width: 12%;
 }
 
 #input-box {
+  font-family: monospace;
+  font-size: 1.2em;
   text-align: center;
   width: fit-content;
   padding: 1em;
@@ -29,6 +38,7 @@ html {
   margin-top: 0.2em;
   margin-bottom: 1.3em;
   margin-right: 0.5em;
+  margin-left: 0.5em;
 }
 
 #radius {
@@ -37,11 +47,14 @@ html {
 
 #submit {
   height: 2em;
+  font-family: Amatic SC;
+  font-size: 1.1em !important;
   border-radius: 10em;
-  width: 12em;
+  width: 8em;
   font-size: 0.8em;
   background: none;
   border-color: #949494;
+  margin-right: 0.3em;
 }
 
 .tooltip {
@@ -56,6 +69,7 @@ html {
     padding: 0.5em;
     background-color: white;
     text-align: center;
+    font-size: 1em;
     font-family: Roboto;
     border-radius: 6px;
     border-color: black;
@@ -86,4 +100,12 @@ html {
 
 a:link {
   text-decoration: none;
+}
+
+a:link {
+  color: black;
+}
+
+.far {
+  font-size: 0.7em;
 }

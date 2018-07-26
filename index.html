@@ -4,6 +4,7 @@
       <title>ClojureScript Hello Browser</title>
       <link rel="stylesheet" type="text/css" href="public/general.css">
       <link rel="stylesheet" type="text/css" href="public/lists.css">
+      <link href="https://fonts.googleapis.com/css?family=Amatic+SC" rel="stylesheet">
       <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
       <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css" integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ" crossorigin="anonymous">
     </head>
@@ -18,8 +19,8 @@
     2. Longitude:
     <input type="number" name="longitude" class="form_field" id="longitude" placeholder="-0.118092"><i class="far fa-question-circle tooltip"> <span class="tooltiptext">To learn any coordinates visit <a href="https://www.maps.ie/coordinates.html">this </a> website. Default coordinates are of London.</span></i><br>
     3. Radius:
-    <input type="number" name="radius" class="form_field" id="radius" placeholder="20">kilometers <i class="far fa-question-circle tooltip"> <span class="tooltiptext">Radius of search.</span></i><br>
-    <button name="submit" id="submit">Find cities</button>
+    <input type="number" name="radius" class="form_field" id="radius" placeholder="20">km <i class="far fa-question-circle tooltip"> <span class="tooltiptext">Radius of search.</span></i><br>
+    <button name="submit" id="submit">Find cities</button><i class="far fa-question-circle tooltip"> <span class="tooltiptext">Cities with more than 5000 inhabitants within the radius of search.</span></i>
   </div>
   <div id="boxes">
     <div id="city-container" class="list-box">
@@ -35,7 +36,7 @@
       <div id="click-info">Click on a city to remove it from the wish list.</div>
     </div>
   </div>
-  <div id="footer">This website was created by <a href="www.github.com/Kotauror/warm_places">@Kotauror</a> as a part of apprenticeship @<a href="https://8thlight.com/">8th Light</a>. API used: <a href=" http://www.geonames.org/">GeoNames</a>, graphic: wikicommons.
+  <div id="footer">This website was created by <a href="www.github.com/Kotauror/warm_places">@Kotauror</a> as a part of apprenticeship @<a href="https://8thlight.com/">8th Light</a>. API used: <a href="http://www.geonames.org/">@GeoNames</a> and <a href="http://openweathermap.org">@Open Weather</a>, graphic: wikicommons.
   </div>
 </body>
 </html>
