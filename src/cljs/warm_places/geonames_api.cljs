@@ -1,6 +1,8 @@
 (ns warm_places.geonames_api
   (:require [warm_places.general_api :refer [fetch
                                             resolve-promises
+                                            resolve-and-call-one-function
+                                            resolve-and-call-two-functions
                                             use-json
                                             extract-data]]
             [warm_places.state :refer [reset-vector-atom
@@ -30,8 +32,8 @@
     (get-city-names v)
     (mapv get-city-string v)
     (resolve-promises v)
-    (.then v #(mapv add-to-cities %1))
-    (.then v #(update-cities-in-dom (get-cities)))))
+    (resolve-and-call-one-function v mapv add-to-cities)
+    (resolve-and-call-two-functions v update-cities-in-dom get-cities)))
 
 (defn call-geonames-api [latitude longitude radius callback]
   (-> (geonames-api-url latitude longitude radius)
