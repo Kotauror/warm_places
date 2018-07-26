@@ -23,18 +23,15 @@
     (.-geonames)
     (mapv get-city-name)))
 
-(defn add-to-cities-list [city-promise]
-;  (js/console.log "in add-to-cities-list" city-promise)
-  (.then city-promise #(add-to-cities %1)))
+; untested - it is not possible to stub the Promise.all because promise supp    ort is not present in PhantomJS that is used by specljs.
 
 (defn update-cities-from-json [json]
   (reset-vector-atom cities)
   (as-> json v
     (get-city-names v)
     (mapv get-city-string v)
-    (.-tail v)
-    (mapv add-to-cities-list v)
     (.all js/Promise v)
+    (.then v #(mapv add-to-cities %1))
     (.then v #(update-cities-in-dom (get-cities)))))
 
 (defn call-geonames-api [latitude longitude radius callback]
@@ -44,3 +41,4 @@
 
 (defn handle-get-cities-click [latitude longitude radius]
  (call-geonames-api latitude longitude radius update-cities-from-json))
+
