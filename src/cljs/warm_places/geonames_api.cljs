@@ -1,5 +1,6 @@
 (ns warm_places.geonames_api
   (:require [warm_places.general_api :refer [fetch
+                                            resolve-promises
                                             use-json
                                             extract-data]]
             [warm_places.state :refer [reset-vector-atom
@@ -23,14 +24,12 @@
     (.-geonames)
     (mapv get-city-name)))
 
-; untested - it is not possible to stub the Promise.all because promise supp    ort is not present in PhantomJS that is used by specljs.
-
 (defn update-cities-from-json [json]
   (reset-vector-atom cities)
   (as-> json v
     (get-city-names v)
     (mapv get-city-string v)
-    (.all js/Promise v)
+    (resolve-promises v)
     (.then v #(mapv add-to-cities %1))
     (.then v #(update-cities-in-dom (get-cities)))))
 

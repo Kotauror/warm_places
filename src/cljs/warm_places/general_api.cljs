@@ -8,3 +8,6 @@
 
 (defn extract-data [response-promise callback]
   (.then response-promise #(use-json %1 callback)))
+
+(defn resolve-promises [array-of-promises]
+  (.all js/Promise array-of-promises))
