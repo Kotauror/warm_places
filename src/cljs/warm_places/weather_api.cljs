@@ -18,7 +18,7 @@
 (defn null-fallback [city-with-temperature city]
   (if (not= city-with-temperature null)
     city-with-temperature 
-    (str city ": n/a")))
+    city))
 
 (defn get-city-string [city] 
   (-> city 

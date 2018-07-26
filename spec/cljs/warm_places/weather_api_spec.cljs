@@ -38,9 +38,9 @@
     "Bawku: 27.22°C"
     (null-fallback "Bawku: 27.22°C" "Bawku")))
 
-  (it "returns city with n/a when city-with-temperature is null"
+  (it "returns city when city-with-temperature is null"
     (should=
-    "Bawku: n/a"
+    "Bawku"
     (null-fallback nil "Bawku"))))
 
 (describe "get-city-string"
