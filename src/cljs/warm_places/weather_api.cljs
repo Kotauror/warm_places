@@ -5,26 +5,25 @@
 
 (enable-console-print!)
 
-;(defn fetch [url]
- ; (js/fetch url))
-
-;(defn use-json [response callback]
- ; (.then (.json response) callback))
-
 (defn weather-api-url [city]
  (str "http://api.openweathermap.org/data/2.5/weather?q=" city "&units=metric&appid=48e7a56793fa02078630b7e07b5342ad"))
 
-(defn get-city-temperature-string [json]
-  (let [temp (str (.-temp (.-main json)))
-        city (str (.-name json))]
-  (str city ": " temp "°C")))
+(defn get-city-temperature-string [city json]
+  (if (not= (.-cod json) "404")
+    (let [temp (str (.-temp (.-main json)))
+          city (str (.-name json))]
+    (str city ": " temp "°C"))
+    city))
 
-;(defn extract-data [response-promise callback] 
- ; (.then response-promise #(use-json %1 callback)))
+(defn null-fallback [city-with-temperature city]
+  (if (not= city-with-temperature null)
+    city-with-temperature 
+    (str city ": n/a")))
 
 (defn get-city-string [city] 
   (-> city 
     (weather-api-url)
     (fetch)
-    (extract-data get-city-temperature-string)))
+    (extract-data (partial get-city-temperature-string city))
+    (null-fallback city)))
 
