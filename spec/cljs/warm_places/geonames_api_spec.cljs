@@ -3,17 +3,21 @@
   (:require [speclj.core]
             [warm_places.weather_api :refer [get-city-string]]
             [warm_places.general_api :refer [fetch 
-                                            extract-data]]
+                                            extract-data
+                                            resolve-promises
+                                            resolve-and-call-one-function
+                                            resolve-and-call-two-functions]]
             [warm_places.geonames_api :refer [geonames-api-url
-                                          ;fetch
-                                          ;extract-data
                                           call-geonames-api
                                           get-city-name
+                                          get-cities-with-temperatures
                                           get-city-names
                                           handle-get-cities-click
                                           update-cities-from-json]]
             [warm_places.dom_manipulation :refer [update-cities-in-dom]]
             [warm_places.state :refer [update-cities-state
+                                       add-to-cities
+                                       get-cities
                                        cities]]))
 
 (describe "geonames-api-url"
@@ -76,19 +80,44 @@
         {:with
           [100 200 50 update-cities-from-json]}))))
 
-; untested - it is not possible to stub the Promise.all because promise support is not present in PhantomJS that is used by specljs. 
+(describe "Update-cities-from-json"
+  (with-stubs)
+  (it "calls the right methods with right arguments"
+    (with-redefs [
+      get-city-names (stub :get-city-names-stub {:return :cities})
+      get-cities-with-temperatures (stub :get-cities-with-temperatures-stub {:return :array-of-promises})
+      resolve-promises (stub :resolve-promises-stub {:return :promises-from-all})
+      resolve-and-call-one-function (stub :resolve-and-call-one-function-stub {:return :promise-from-one-function})
+      resolve-and-call-two-functions (stub :resolve-and-call-two-functions-stub)
+      ]
 
-;(describe "Update-cities-from-json"
-;  (with-stubs)
-;  (it "calls the right methods with right arguments"
-;    (with-redefs [
-;      get-city-names (stub :get-city-names-stub)
-;      get-city-string (stub :get-city-string-stub) 
-;      update-cities-in-dom (stub :update-cities-in-dom-stub)
-;      ]
-;
-;      (update-cities-from-json response-json-geonames)
-;
-;      (should=
-;        ["Krakow" "Warszawa"]
-;        @cities))))
+      (update-cities-from-json response-json-geonames)
+
+      (should-have-invoked
+        :get-city-names-stub
+        {:with 
+          [response-json-geonames]})
+
+      (should-have-invoked
+        :get-cities-with-temperatures-stub
+        {:with 
+          [:cities]})
+
+      (should-have-invoked
+        :resolve-promises-stub
+        {:with 
+          [:array-of-promises]})
+
+      (should-have-invoked
+        :resolve-and-call-one-function-stub
+        {:with 
+          [:promises-from-all
+           mapv
+           add-to-cities]})
+
+      (should-have-invoked
+        :resolve-and-call-two-functions-stub
+        {:with 
+          [:promise-from-one-function
+           update-cities-in-dom
+           get-cities]}))))

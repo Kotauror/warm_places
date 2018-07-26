@@ -26,11 +26,14 @@
     (.-geonames)
     (mapv get-city-name)))
 
+(defn get-cities-with-temperatures [cities]
+  (mapv get-city-string cities))
+
 (defn update-cities-from-json [json]
   (reset-vector-atom cities)
   (as-> json v
     (get-city-names v)
-    (mapv get-city-string v)
+    (get-cities-with-temperatures v)
     (resolve-promises v)
     (resolve-and-call-one-function v mapv add-to-cities)
     (resolve-and-call-two-functions v update-cities-in-dom get-cities)))
