@@ -21,19 +21,19 @@
  (let [topo-name (.-toponymName city-data)]
   (hash-map :name topo-name)))
 
-(defn get-city-names [json]
+(defn get-city-hashes [json]
   (->> json
     (.-geonames)
     (mapv get-city-name)))
 
-(defn get-cities-with-temperatures [cities]
+(defn get-city-temperature-hashes [cities]
   (mapv get-city-temp-hash cities))
 
 (defn update-cities-from-json [json]
   (reset-vector-atom cities)
   (as-> json v
-    (get-city-names v)
-    (get-cities-with-temperatures v)
+    (get-city-hashes v)
+    (get-city-temperature-hashes v)
     (resolve-promises v)
     (resolve-and-call-one-function v mapv add-to-cities)
     (resolve-and-call-two-functions v update-cities-in-dom get-cities)))
