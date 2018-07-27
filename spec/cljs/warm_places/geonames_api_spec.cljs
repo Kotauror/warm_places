@@ -1,7 +1,6 @@
 (ns warm_places.geonames_api-spec
   (:require-macros [speclj.core :refer [describe it should= stub with-stubs should-have-invoked]])
   (:require [speclj.core]
-            [warm_places.weather_api :refer [get-city-string]]
             [warm_places.general_api :refer [fetch 
                                             extract-data
                                             resolve-promises

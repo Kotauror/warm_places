@@ -9,7 +9,7 @@
                                       cities
                                       add-to-cities
                                       get-cities]]
-            [warm_places.weather_api :refer [get-city-string]]
+            [warm_places.weather_api :refer [get-city-temp-hash]]
             [warm_places.dom_manipulation :refer [update-cities-in-dom]]))
 
 (enable-console-print!)
@@ -27,7 +27,7 @@
     (mapv get-city-name)))
 
 (defn get-cities-with-temperatures [cities]
-  (mapv get-city-string cities))
+  (mapv get-city-temp-hash cities))
 
 (defn update-cities-from-json [json]
   (reset-vector-atom cities)
