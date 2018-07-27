@@ -1,5 +1,5 @@
 #boxes {
-  margin-top: 3em;
+  margin-top: 2.3em;
   display: flex;
   width: 80%;
   margin-left: 10%;
@@ -7,38 +7,43 @@
 }
 
 .list-box {
-  height: 20em;
+  height: 22em;
   width: 48%;
   padding-top: 1em;
   padding-bottom: 2em;
+  border-color: #80808075;
+  border-width: 0.1em;
+  border-style: solid;
+  border-radius: 2em;
 }
 
 #city-container {
-  background-color: #e2e2e254;
+  background-color: #e2e2e214;
   margin-right: 2%;
 }
 
 #cities {
   overflow-y: scroll;
-  height: 15em;
+  height: 16em;
 }
 
 #wishlist-container {
-  background-color: #ffbab363;
+  background-color: #ffddb37d;
   margin-left: 2%;
 }
 
 #wishlist {
   overflow-y: scroll;
-  height: 15em;
+  height: 16em;
 }
 
 #box-description {
-  font-size: 1.2em;
+  font-family: Amatic SC;
+  font-size: 2em;
   display: block;
   margin-left: auto;
   margin-right: auto;
-  margin-bottom: 2em;
+  margin-bottom: 1em;
   text-align: center;
 }
 

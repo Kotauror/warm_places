@@ -40,6 +40,6 @@
   (clean-list "cities")
   (mapv add-city-to-cities-ul list-of-cities))
 
-(defn update-wishlist-in-dom [list-of-cities-in-wishlist] 
+(defn update-wishlist-in-dom [list-of-cities-in-wishlist]
   (clean-list "wishlist")
   (mapv add-city-to-wishlist-ul list-of-cities-in-wishlist))

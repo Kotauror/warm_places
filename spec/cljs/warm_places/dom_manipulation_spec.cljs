@@ -1,12 +1,10 @@
 (ns warm_places.dom_manipulation-spec
   (:require-macros [speclj.core :refer [describe it should= stub with-stubs should-have-invoked]])
   (:require [speclj.core]
-            [warm_places.dom_manipulation :refer [update-cities-in-dom
+          [warm_places.dom_manipulation :refer [update-cities-in-dom
                                                   click-in-cities-wrapper
                                                   click-in-wishlist-wrapper]]
-            [warm_places.state :refer [get-cities
-                                       handle-click-in-cities
-                                       update-cities-state]]))
+            [warm_places.state :refer [update-cities-state]]))
 
 (describe "update-cities-in-dom"
   (it "puts list of cities to the container"
@@ -14,14 +12,14 @@
     (.setAttribute cities-list-element "id" "cities")
     (.appendChild (.-body js/document) cities-list-element)
 
-    (update-cities-in-dom ["Cambridge" "London"])
+    (update-cities-in-dom ["Cambridge: 20ºC" "London: 25ºC"])
 
     (should=
       2
       (.-length (.querySelectorAll cities-list-element "li")))
 
     (should=
-      "Cambridge"
+      "Cambridge: 20ºC"
       (.-textContent (.item (.querySelectorAll cities-list-element "li") 0))))))
 
 (describe "click-in-cities-wrapper"
@@ -32,9 +30,9 @@
     (.setAttribute wishlist-list-element "id" "wishlist")
     (.appendChild (.-body js/document) cities-list-element)
     (.appendChild (.-body js/document) wishlist-list-element)
-    (update-cities-state ["Cambridge"])
+    (update-cities-state ["Cambridge: 20ºC"])
 
-    (click-in-cities-wrapper "Cambridge")
+    (click-in-cities-wrapper "Cambridge: 20ºC")
    
      (should=
        0
@@ -52,10 +50,10 @@
     (.setAttribute wishlist-list-element "id" "wishlist")
     (.appendChild (.-body js/document) cities-list-element)
     (.appendChild (.-body js/document) wishlist-list-element)
-    (update-cities-state ["Cambridge"])
+    (update-cities-state ["Cambridge: 20ºC"])
 
-    (click-in-cities-wrapper "Cambridge")
-    (click-in-wishlist-wrapper "Cambridge")
+    (click-in-cities-wrapper "Cambridge: 20ºC")
+    (click-in-wishlist-wrapper "Cambridge: 20ºC")
    
      (should=
        0

@@ -23,6 +23,9 @@
 (defn add-to-wishlist [city]
   (swap! wishlist conj city))
 
+(defn add-to-cities [city]
+  (swap! cities conj city))
+
 (defn remove-element-from-atom [element atom]
   (swap! atom (partial remove #{element})))
 
