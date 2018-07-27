@@ -25,7 +25,7 @@
 
 (defn add-element-to-dom [city container-name function]
   (let [li-node (.createElement js/document "li")
-        text-node (.createTextNode js/document city)]
+        text-node (.createTextNode js/document(str (:name city) ": " (:temp city)))]
         (.appendChild li-node text-node)
         (.addEventListener li-node "click" #(function city))
         (.appendChild (.getElementById js/document container-name) li-node)))
