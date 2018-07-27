@@ -1,8 +1,8 @@
 (ns warm_places.core
   (:require [speclj.core]
-            [warm_places.state :refer [latitude
-                                       longitude
-                                       radius
+            [warm_places.state :refer [get-latitude
+                                       get-longitude
+                                       get-radius
                                        update-longitude
                                        update-latitude
                                        update-radius
@@ -20,7 +20,7 @@
   (.addEventListener
     (.getElementById js/document "submit")
     "click"
-    (fn [] (handle-get-cities-click @latitude @longitude @radius))))
+    (fn [] (handle-get-cities-click (get-latitude) (get-longitude) (get-radius)))))
 
 
 (defn add-latitude-input-listener []

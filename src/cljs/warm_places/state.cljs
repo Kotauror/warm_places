@@ -42,5 +42,14 @@
 (defn get-wishlist [] 
   @wishlist)
 
+(defn get-latitude [] 
+  @latitude)
+
+(defn get-longitude [] 
+  @longitude)
+
+(defn get-radius [] 
+  @radius)
+
 (defn reset-vector-atom [vector-atom] 
   (reset! vector-atom []))
