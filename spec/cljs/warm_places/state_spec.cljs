@@ -39,35 +39,35 @@
     @radius))
 
   (it "updates cities atom"
-    (update-cities-state ["Krakow" "Warszawa"])
+    (update-cities-state [(hash-map :name "Krakow") (hash-map :name "Warszawa")])
     (should=
-    ["Krakow" "Warszawa"]
+    [{:name "Krakow"} {:name "Warszawa"}]
     @cities))
 
   (it "adds element to a wishlist"
     (reset-vector-atom wishlist)
-    (add-to-wishlist "Warszawa")
-    (add-to-wishlist "Krakow")
+    (add-to-wishlist (hash-map :name "Warszawa"))
+    (add-to-wishlist (hash-map :name "Krakow"))
     (should=
-    ["Warszawa" "Krakow"]
+    [{:name "Warszawa"} {:name "Krakow"}]
     @wishlist))
 
   (it "adds element to cities" 
     (reset-vector-atom cities)
-    (add-to-cities "Krakow")
+    (add-to-cities (hash-map :name "Krakow"))
     (should=
-    ["Krakow"]
+    [{:name "Krakow"}]
     @cities))
 
   (it "removes element from atom"
-    (update-cities-state ["Krakow" "Warszawa"])
-    (remove-element-from-atom "Krakow" cities)
+    (update-cities-state [(hash-map :name "Krakow") (hash-map :name "Warszawa")])
+    (remove-element-from-atom (hash-map :name "Krakow") cities)
     (should=
-    ["Warszawa"]
+    [{:name "Warszawa"}]
     @cities))
 
   (it "reset the value of vector atom to []"
-    (update-cities-state ["Krakow" "Warszawa"])
+    (update-cities-state [(hash-map :name "Krakow") (hash-map :name "Warszawa")])
     (reset-vector-atom cities)
     (should=
     []
@@ -80,9 +80,9 @@
     add-to-wishlist (stub :add-to-wishlist-stub)
     remove-element-from-atom (stub :remove-element-from-atom-stub)
   ]
-  (update-cities-state ["London" "Paris"])
+  (update-cities-state [(hash-map :name "London") (hash-map :name "Paris")])
 
-  (handle-click-in-cities "Krakow")
+  (handle-click-in-cities (hash-map :name "London"))
   
   (should-have-invoked 
     :add-to-wishlist-stub
@@ -94,10 +94,10 @@
   (with-redefs [
     remove-element-from-atom (stub :remove-element-from-atom-stub)
   ]
-  (update-cities-state ["London" "Paris"])
-  (add-to-wishlist "London")
+  (update-cities-state [(hash-map :name "London") (hash-map :name "Paris")])
+  (add-to-wishlist (hash-map :name "London"))
 
-  (handle-click-in-wishlist "London")
+  (handle-click-in-wishlist (hash-map :name "London"))
   
   (should-have-invoked 
     :remove-element-from-atom-stub))))
@@ -105,19 +105,19 @@
 (describe "get-cities" 
   (it "returns cities"
 
-  (update-cities-state ["Krakow" "Warszawa"]) 
+  (update-cities-state [(hash-map :name "Krakow") (hash-map :name "Warszawa")])
 
   (should= 
-  ["Krakow" "Warszawa"]
+  [{:name "Krakow"} {:name "Warszawa"}]
   (get-cities))))
 
 (describe "get-wihlist" 
   (it "returns wishlist"
   (reset-vector-atom wishlist)
 
-  (add-to-wishlist "Krakow") 
+  (add-to-wishlist (hash-map :name "Krakow"))
 
   (should= 
-  ["Krakow"]
+  [{:name "Krakow"}]
   (get-wishlist))))
 

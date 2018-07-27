@@ -9,7 +9,7 @@
                                       cities
                                       add-to-cities
                                       get-cities]]
-            [warm_places.weather_api :refer [get-city-string]]
+            [warm_places.weather_api :refer [get-city-temp-hash]]
             [warm_places.dom_manipulation :refer [update-cities-in-dom]]))
 
 (enable-console-print!)
@@ -18,21 +18,22 @@
  (str "http://api.geonames.org/findNearbyPlaceNameJSON?maxRows=20&lat=" latitude "&lng=" longitude "&cities=cities5000&radius=" radius "&username=kotaur"))
 
 (defn get-city-name [city-data]
- (.-toponymName city-data))
+ (let [topo-name (.-toponymName city-data)]
+  (hash-map :name topo-name)))
 
-(defn get-city-names [json]
+(defn get-city-hashes [json]
   (->> json
     (.-geonames)
     (mapv get-city-name)))
 
-(defn get-cities-with-temperatures [cities]
-  (mapv get-city-string cities))
+(defn get-city-temperature-hashes [cities]
+  (mapv get-city-temp-hash cities))
 
 (defn update-cities-from-json [json]
   (reset-vector-atom cities)
   (as-> json v
-    (get-city-names v)
-    (get-cities-with-temperatures v)
+    (get-city-hashes v)
+    (get-city-temperature-hashes v)
     (resolve-promises v)
     (resolve-and-call-one-function v mapv add-to-cities)
     (resolve-and-call-two-functions v update-cities-in-dom get-cities)))
