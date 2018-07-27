@@ -17,23 +17,22 @@
 (defn geonames-api-url [latitude longitude radius]
  (str "http://api.geonames.org/findNearbyPlaceNameJSON?maxRows=20&lat=" latitude "&lng=" longitude "&cities=cities5000&radius=" radius "&username=kotaur"))
 
-(defn get-city-name [city-data]
- (let [topo-name (.-toponymName city-data)]
-  (hash-map :name topo-name)))
+(defn build-destination [city-data]
+  (hash-map :name (.-toponymName city-data)))
 
-(defn get-city-hashes [geonames-json]
+(defn get-destinations [geonames-json]
   (->> geonames-json
     (.-geonames)
-    (mapv get-city-name)))
+    (mapv build-destination)))
 
-(defn get-city-temperature-hashes [cities]
+(defn add-temperatures-to-destinations [cities]
   (mapv get-city-temp-hash cities))
 
-(defn update-cities-from-json [json]
+(defn update-cities-from-json [geonames-json]
   (reset-vector-atom cities)
-  (as-> json v
-    (get-city-hashes v)
-    (get-city-temperature-hashes v)
+  (as-> geonames-json v
+    (get-destinations v)
+    (add-temperatures-to-destinations v)
     (resolve-promises v)
     (resolve-and-call-one-function v mapv add-to-cities)
     (resolve-and-call-two-functions v update-cities-in-dom get-cities)))
