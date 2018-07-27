@@ -18,7 +18,8 @@
  (str "http://api.geonames.org/findNearbyPlaceNameJSON?maxRows=20&lat=" latitude "&lng=" longitude "&cities=cities5000&radius=" radius "&username=kotaur"))
 
 (defn get-city-name [city-data]
- (.-toponymName city-data))
+ (let [topo-name (.-toponymName city-data)]
+  (hash-map :name topo-name)))
 
 (defn get-city-names [json]
   (->> json
