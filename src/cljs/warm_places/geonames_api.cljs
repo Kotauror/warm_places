@@ -21,8 +21,8 @@
  (let [topo-name (.-toponymName city-data)]
   (hash-map :name topo-name)))
 
-(defn get-city-hashes [json]
-  (->> json
+(defn get-city-hashes [geonames-json]
+  (->> geonames-json
     (.-geonames)
     (mapv get-city-name)))
 
@@ -38,10 +38,10 @@
     (resolve-and-call-one-function v mapv add-to-cities)
     (resolve-and-call-two-functions v update-cities-in-dom get-cities)))
 
-(defn call-geonames-api [latitude longitude radius callback]
+(defn call-geonames-api [latitude longitude radius update-cities-from-json]
   (-> (geonames-api-url latitude longitude radius)
     (fetch)
-    (extract-data callback)))
+    (extract-data update-cities-from-json)))
 
 (defn handle-get-cities-click [latitude longitude radius]
  (call-geonames-api latitude longitude radius update-cities-from-json))
