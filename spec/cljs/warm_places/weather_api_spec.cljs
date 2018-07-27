@@ -5,7 +5,6 @@
                                             extract-data]]
             [warm_places.weather_api :refer [get-city-string
                                             weather-api-url
-                                            null-fallback
                                             get-city-temperature-string]]))
  (describe "weather-api-url"
     (it "builds a query string"
@@ -32,17 +31,6 @@
       "Bawku"
       (get-city-temperature-string "Bawku" response-json-with-404))))
 
-(describe "null-fallback"
-  (it "returns city-with-temperature when its not null"
-    (should=
-    "Bawku: 27.22°C"
-    (null-fallback "Bawku: 27.22°C" "Bawku")))
-
-  (it "returns city when city-with-temperature is null"
-    (should=
-    "Bawku"
-    (null-fallback nil "Bawku"))))
-
 (describe "get-city-string"
     (with-stubs)
     (it "calls the right methods"
@@ -50,7 +38,6 @@
       weather-api-url (stub :weather-api-url-stub {:return :url})
       fetch (stub :fetch-stub {:return :response-promise})
       extract-data (stub :extract-data-stub {:return :city-with-temp})
-      null-fallback (stub :null-fallback-stub)
     ]
 
     (get-city-string "Krakow")
@@ -64,9 +51,4 @@
         [:url]})
 
     (should-have-invoked
-      :extract-data-stub)
-
-    (should-have-invoked
-      :null-fallback-stub
-      {:with 
-        [:city-with-temp "Krakow"]}))))
+      :extract-data-stub))))

@@ -8,7 +8,6 @@
             [warm_places.state :refer [reset-vector-atom
                                       cities
                                       add-to-cities
-                                      update-cities-state
                                       get-cities]]
             [warm_places.weather_api :refer [get-city-string]]
             [warm_places.dom_manipulation :refer [update-cities-in-dom]]))

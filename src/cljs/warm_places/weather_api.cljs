@@ -15,15 +15,9 @@
     (str city ": " temp "°C"))
     city))
 
-(defn null-fallback [city-with-temperature city]
-  (if (not= city-with-temperature null)
-    city-with-temperature 
-    city))
-
 (defn get-city-string [city] 
   (-> city 
     (weather-api-url)
     (fetch)
-    (extract-data (partial get-city-temperature-string city))
-    (null-fallback city)))
+    (extract-data (partial get-city-temperature-string city))))
 

@@ -1,12 +1,10 @@
 (ns warm_places.dom_manipulation-spec
   (:require-macros [speclj.core :refer [describe it should= stub with-stubs should-have-invoked]])
   (:require [speclj.core]
-            [warm_places.dom_manipulation :refer [update-cities-in-dom
+          [warm_places.dom_manipulation :refer [update-cities-in-dom
                                                   click-in-cities-wrapper
                                                   click-in-wishlist-wrapper]]
-            [warm_places.state :refer [get-cities
-                                       handle-click-in-cities
-                                       update-cities-state]]))
+            [warm_places.state :refer [update-cities-state]]))
 
 (describe "update-cities-in-dom"
   (it "puts list of cities to the container"
