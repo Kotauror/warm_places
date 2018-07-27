@@ -3,8 +3,8 @@
   (:require [speclj.core]
             [warm_places.general_api :refer [fetch 
                                             extract-data
-                                            resolve-promises
-                                            resolve-and-call-one-function
+                                            combine-promises
+                                            map-through-promise
                                             resolve-and-call-two-functions]]
             [warm_places.geonames_api :refer [geonames-api-url
                                           call-geonames-api
@@ -84,8 +84,8 @@
     (with-redefs [
       get-destinations (stub :get-destinations-stub {:return :cities})
       add-temperatures-to-destinations (stub :add-temperatures-to-destinations-stub {:return :array-of-promises})
-      resolve-promises (stub :resolve-promises-stub {:return :promises-from-all})
-      resolve-and-call-one-function (stub :resolve-and-call-one-function-stub {:return :promise-from-one-function})
+      combine-promises (stub :combine-promises-stub {:return :promises-from-all})
+      map-through-promise (stub :map-through-promise-stub {:return :promise-from-one-function})
       resolve-and-call-two-functions (stub :resolve-and-call-two-functions-stub)
       ]
 
@@ -102,15 +102,14 @@
           [:cities]})
 
       (should-have-invoked
-        :resolve-promises-stub
+        :combine-promises-stub
         {:with 
           [:array-of-promises]})
 
       (should-have-invoked
-        :resolve-and-call-one-function-stub
+        :map-through-promise-stub
         {:with 
           [:promises-from-all
-           mapv
            add-to-cities]})
 
       (should-have-invoked

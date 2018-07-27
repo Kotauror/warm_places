@@ -1,7 +1,7 @@
 (ns warm_places.geonames_api
   (:require [warm_places.general_api :refer [fetch
-                                            resolve-promises
-                                            resolve-and-call-one-function
+                                            combine-promises
+                                            map-through-promise
                                             resolve-and-call-two-functions
                                             use-json
                                             extract-data]]
@@ -33,8 +33,8 @@
   (as-> geonames-json v
     (get-destinations v)
     (add-temperatures-to-destinations v)
-    (resolve-promises v)
-    (resolve-and-call-one-function v mapv add-to-cities)
+    (combine-promises v)
+    (map-through-promise v add-to-cities)
     (resolve-and-call-two-functions v update-cities-in-dom get-cities)))
 
 (defn call-geonames-api [latitude longitude radius update-cities-from-json]
