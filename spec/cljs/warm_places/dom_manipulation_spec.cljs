@@ -14,7 +14,7 @@
     (.setAttribute cities-list-element "id" cities-list)
     (.appendChild (.-body js/document) cities-list-element)
 
-    (update-cities-in-dom [(hash-map :name "Cambridge" :temp "20ºC") (hash-map :name "London" :temp "25ºC")])
+    (update-cities-in-dom [(hash-map :name "Cambridge" :temp "20") (hash-map :name "London" :temp "25")])
 
     (should=
       2
@@ -34,7 +34,7 @@
     (.appendChild (.-body js/document) wishlist-list-element)
     (update-cities-state (hash-map :name "Cambridge" :temp "20ºC"))
 
-    (click-in-cities-wrapper (hash-map :name "Cambridge" :temp "20ºC"))
+    (click-in-cities-wrapper (hash-map :name "Cambridge" :temp "20"))
    
      (should=
        0
@@ -54,8 +54,8 @@
     (.appendChild (.-body js/document) wishlist-list-element)
     (update-cities-state (hash-map :name "Cambridge" :temp "20ºC"))
 
-    (click-in-cities-wrapper (hash-map :name "Cambridge" :temp "20ºC"))
-    (click-in-wishlist-wrapper (hash-map :name "Cambridge" :temp "20ºC"))
+    (click-in-cities-wrapper (hash-map :name "Cambridge" :temp "20"))
+    (click-in-wishlist-wrapper (hash-map :name "Cambridge" :temp "20"))
    
      (should=
        0
