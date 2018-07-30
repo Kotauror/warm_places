@@ -16,6 +16,7 @@
             [warm_places.state :refer [update-cities-state
                                        add-to-cities
                                        get-cities
+                                       reset-vector-atom
                                        cities]]))
 
 (describe "geonames-api-url"
@@ -69,6 +70,7 @@
   (it "calls call-geonames-api with given values and update-cities-from-json"
     (with-redefs [
       call-geonames-api (stub :call-geonames-api-stub)
+      partial (stub :partial-stub {:return :partial-return})
       ]
 
       (handle-get-cities-click 100 200 50)
@@ -76,7 +78,7 @@
       (should-have-invoked
         :call-geonames-api-stub
         {:with
-          [100 200 50 update-cities-from-json]}))))
+          [100 200 50 :partial-return]}))))
 
 (describe "Update-cities-from-json"
   (with-stubs)
@@ -87,9 +89,10 @@
       combine-promises (stub :combine-promises-stub {:return :promises-from-all})
       map-through-promise (stub :map-through-promise-stub {:return :promise-from-one-function})
       compose-functions (stub :compose-functions-stub)
+      reset-vector-atom (stub :reset-vector-atom-stub)
       ]
 
-      (update-cities-from-json response-json-geonames)
+      (update-cities-from-json :reset-vector-atom-stub response-json-geonames)
 
       (should-have-invoked
         :get-destinations-stub

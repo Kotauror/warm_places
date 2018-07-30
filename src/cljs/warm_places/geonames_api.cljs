@@ -28,8 +28,8 @@
 (defn add-temperatures-to-destinations [cities]
   (mapv add-temperature-to-destination cities))
 
-(defn update-cities-from-json [geonames-json]
-  (reset-vector-atom cities)
+(defn update-cities-from-json [func-reseting-atom geonames-json]
+  (func-reseting-atom cities)
   (as-> geonames-json v
     (get-destinations v)
     (add-temperatures-to-destinations v)
@@ -43,5 +43,5 @@
     (extract-data update-cities-from-json)))
 
 (defn handle-get-cities-click [latitude longitude radius]
- (call-geonames-api latitude longitude radius update-cities-from-json))
+ (call-geonames-api latitude longitude radius (partial update-cities-from-json reset-vector-atom)))
 
