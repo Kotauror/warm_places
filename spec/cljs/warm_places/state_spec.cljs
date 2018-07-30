@@ -13,6 +13,9 @@
                                       add-to-cities
                                       get-cities
                                       get-wishlist
+                                      get-latitude
+                                      get-longitude
+                                      get-radius
                                       longitude
                                       latitude
                                       radius
@@ -120,4 +123,28 @@
   (should= 
   [{:name "Krakow"}]
   (get-wishlist))))
+
+(describe "get-latitude"
+  (it "returns latitude"
+  (update-latitude "10")
+  
+  (should=
+  "10"
+  (get-latitude))))
+
+(describe "get-longitude"
+  (it "returns longitude"
+  (update-longitude "20")
+  
+  (should=
+  "20"
+  (get-longitude))))
+
+(describe "get-radius"
+  (it "returns radius"
+  (update-radius "3")
+  
+  (should=
+  "3"
+  (get-radius))))
 

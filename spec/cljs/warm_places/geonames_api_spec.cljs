@@ -3,20 +3,20 @@
   (:require [speclj.core]
             [warm_places.general_api :refer [fetch 
                                             extract-data
-                                            resolve-promises
-                                            resolve-and-call-one-function
-                                            resolve-and-call-two-functions]]
+                                            combine-promises
+                                            map-through-promise
+                                            compose-functions]]
             [warm_places.geonames_api :refer [geonames-api-url
                                           call-geonames-api
-                                          get-city-name
-                                          get-city-temperature-hashes
-                                          get-city-hashes
+                                          get-destinations
+                                          add-temperatures-to-destinations
                                           handle-get-cities-click
                                           update-cities-from-json]]
             [warm_places.dom_manipulation :refer [update-cities-in-dom]]
             [warm_places.state :refer [update-cities-state
                                        add-to-cities
                                        get-cities
+                                       reset-vector-atom
                                        cities]]))
 
 (describe "geonames-api-url"
@@ -31,11 +31,11 @@
 (def response-json-weather
   (.parse js/JSON "{\"coord\":{\"lon\":-0.24,\"lat\":11.06},\"weather\":[{\"id\":802,\"main\":\"Clouds\",\"description\":\"scattered clouds\",\"icon\":\"03d\"}],\"base\":\"stations\",\"main\":{\"temp\":27.22,\"pressure\":993.48,\"humidity\":100,\"temp_min\":27.22,\"temp_max\":27.22,\"sea_level\":1022.78,\"grnd_level\":993.48},\"wind\":{\"speed\":3.23,\"deg\":229.002},\"clouds\":{\"all\":44},\"dt\":1532443459,\"sys\":{\"message\":0.0026,\"country\":\"GH\",\"sunrise\":1532411267,\"sunset\":1532456825},\"id\":2303287,\"name\":\"Bawku\",\"cod\":200}"))
 
-(describe "get-city-hashes"
+(describe "get-destinations"
   (it "returns hash maps with city names"
     (should=
       [{:name "Krakow"} {:name "Warszawa"}]
-      (get-city-hashes response-json-geonames))))
+      (get-destinations response-json-geonames))))
 
 (describe "call-geonames-api"
   (with-stubs)
@@ -70,6 +70,7 @@
   (it "calls call-geonames-api with given values and update-cities-from-json"
     (with-redefs [
       call-geonames-api (stub :call-geonames-api-stub)
+      partial (stub :partial-stub {:return :partial-return})
       ]
 
       (handle-get-cities-click 100 200 50)
@@ -77,46 +78,46 @@
       (should-have-invoked
         :call-geonames-api-stub
         {:with
-          [100 200 50 update-cities-from-json]}))))
+          [100 200 50 :partial-return]}))))
 
 (describe "Update-cities-from-json"
   (with-stubs)
   (it "calls the right methods with right arguments"
     (with-redefs [
-      get-city-hashes (stub :get-city-hashes-stub {:return :cities})
-      get-city-temperature-hashes (stub :get-city-temperature-hashes-stub {:return :array-of-promises})
-      resolve-promises (stub :resolve-promises-stub {:return :promises-from-all})
-      resolve-and-call-one-function (stub :resolve-and-call-one-function-stub {:return :promise-from-one-function})
-      resolve-and-call-two-functions (stub :resolve-and-call-two-functions-stub)
+      get-destinations (stub :get-destinations-stub {:return :cities})
+      add-temperatures-to-destinations (stub :add-temperatures-to-destinations-stub {:return :array-of-promises})
+      combine-promises (stub :combine-promises-stub {:return :promises-from-all})
+      map-through-promise (stub :map-through-promise-stub {:return :promise-from-one-function})
+      compose-functions (stub :compose-functions-stub)
+      reset-vector-atom (stub :reset-vector-atom-stub)
       ]
 
-      (update-cities-from-json response-json-geonames)
+      (update-cities-from-json :reset-vector-atom-stub response-json-geonames)
 
       (should-have-invoked
-        :get-city-hashes-stub
+        :get-destinations-stub
         {:with 
           [response-json-geonames]})
 
       (should-have-invoked
-        :get-city-temperature-hashes-stub
+        :add-temperatures-to-destinations-stub
         {:with 
           [:cities]})
 
       (should-have-invoked
-        :resolve-promises-stub
+        :combine-promises-stub
         {:with 
           [:array-of-promises]})
 
       (should-have-invoked
-        :resolve-and-call-one-function-stub
+        :map-through-promise-stub
         {:with 
           [:promises-from-all
-           mapv
            add-to-cities]})
 
       (should-have-invoked
-        :resolve-and-call-two-functions-stub
+        :compose-functions-stub
         {:with 
           [:promise-from-one-function
            update-cities-in-dom
-           get-cities]}))))
+             get-cities]}))))

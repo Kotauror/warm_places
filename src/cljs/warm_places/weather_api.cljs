@@ -8,16 +8,16 @@
 (defn weather-api-url [city]
  (str "http://api.openweathermap.org/data/2.5/weather?q=" (:name city) "&units=metric&appid=48e7a56793fa02078630b7e07b5342ad"))
 
-(defn add-temp-to-city-hash [city json]
-  (if (not= (.-cod json) "404")
-    (let [temp (str (.-temp (.-main json)))
-          city-name (str (.-name json))]
+(defn update-destination-with-json [city weather-json]
+  (if (not= (.-cod weather-json) "404")
+    (let [temp (str (.-temp (.-main weather-json)))
+          city-name (str (.-name weather-json))]
     (hash-map :name city-name :temp temp ))
     (hash-map :name (city :name) :temp "n/a")))
 
-(defn get-city-temp-hash [city] 
+(defn add-temperature-to-destination [city] 
   (-> city 
     (weather-api-url)
     (fetch)
-    (extract-data (partial add-temp-to-city-hash city))))
+    (extract-data (partial update-destination-with-json city))))
 
