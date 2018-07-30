@@ -15,5 +15,5 @@
 (defn map-through-promise [promise f1]
   (.then promise #(mapv f1 %1)))
 
-(defn resolve-and-call-two-functions [promise f1 f2]
-  (.then promise #(f1 (f2))))
+(defn compose-functions [promise f1 f2]
+  (.then promise #((comp f1 f2))))

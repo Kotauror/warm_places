@@ -2,7 +2,7 @@
   (:require [warm_places.general_api :refer [fetch
                                             combine-promises
                                             map-through-promise
-                                            resolve-and-call-two-functions
+                                            compose-functions
                                             use-json
                                             extract-data]]
             [warm_places.state :refer [reset-vector-atom
@@ -35,7 +35,7 @@
     (add-temperatures-to-destinations v)
     (combine-promises v)
     (map-through-promise v add-to-cities)
-    (resolve-and-call-two-functions v update-cities-in-dom get-cities)))
+    (compose-functions v update-cities-in-dom get-cities)))
 
 (defn call-geonames-api [latitude longitude radius update-cities-from-json]
   (-> (geonames-api-url latitude longitude radius)

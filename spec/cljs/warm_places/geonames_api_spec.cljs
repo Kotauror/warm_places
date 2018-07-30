@@ -5,7 +5,7 @@
                                             extract-data
                                             combine-promises
                                             map-through-promise
-                                            resolve-and-call-two-functions]]
+                                            compose-functions]]
             [warm_places.geonames_api :refer [geonames-api-url
                                           call-geonames-api
                                           get-destinations
@@ -86,7 +86,7 @@
       add-temperatures-to-destinations (stub :add-temperatures-to-destinations-stub {:return :array-of-promises})
       combine-promises (stub :combine-promises-stub {:return :promises-from-all})
       map-through-promise (stub :map-through-promise-stub {:return :promise-from-one-function})
-      resolve-and-call-two-functions (stub :resolve-and-call-two-functions-stub)
+      compose-functions (stub :compose-functions-stub)
       ]
 
       (update-cities-from-json response-json-geonames)
@@ -113,8 +113,8 @@
            add-to-cities]})
 
       (should-have-invoked
-        :resolve-and-call-two-functions-stub
+        :compose-functions-stub
         {:with 
           [:promise-from-one-function
            update-cities-in-dom
-           get-cities]}))))
+             get-cities]}))))
