@@ -4,12 +4,14 @@
           [warm_places.dom_manipulation :refer [update-cities-in-dom
                                                   click-in-cities-wrapper
                                                   click-in-wishlist-wrapper]]
+            [warm_places.html_elements :refer [cities-list
+                                              wishlist-list]]
             [warm_places.state :refer [update-cities-state]]))
 
 (describe "update-cities-in-dom"
   (it "puts list of cities to the container"
     (let [cities-list-element (.createElement js/document "ul")]
-    (.setAttribute cities-list-element "id" "cities")
+    (.setAttribute cities-list-element "id" cities-list)
     (.appendChild (.-body js/document) cities-list-element)
 
     (update-cities-in-dom [(hash-map :name "Cambridge" :temp "20ºC") (hash-map :name "London" :temp "25ºC")])
@@ -26,8 +28,8 @@
   (it "after click in cities shows the right number of cities in cities and wishlist"
     (let [cities-list-element (.createElement js/document "ul")
           wishlist-list-element (.createElement js/document "ul")]
-    (.setAttribute cities-list-element "id" "cities")
-    (.setAttribute wishlist-list-element "id" "wishlist")
+    (.setAttribute cities-list-element "id" cities-list)
+    (.setAttribute wishlist-list-element "id" wishlist-list)
     (.appendChild (.-body js/document) cities-list-element)
     (.appendChild (.-body js/document) wishlist-list-element)
     (update-cities-state (hash-map :name "Cambridge" :temp "20ºC"))
@@ -46,8 +48,8 @@
   (it "after click in wishlist city disapperas from wishlist and doesnt come back to cities"
     (let [cities-list-element (.createElement js/document "ul")
           wishlist-list-element (.createElement js/document "ul")]
-    (.setAttribute cities-list-element "id" "cities")
-    (.setAttribute wishlist-list-element "id" "wishlist")
+    (.setAttribute cities-list-element "id" cities-list)
+    (.setAttribute wishlist-list-element "id"  wishlist-list)
     (.appendChild (.-body js/document) cities-list-element)
     (.appendChild (.-body js/document) wishlist-list-element)
     (update-cities-state (hash-map :name "Cambridge" :temp "20ºC"))

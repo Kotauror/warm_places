@@ -2,7 +2,9 @@
   (:require [warm_places.state :refer [handle-click-in-cities
                                       handle-click-in-wishlist
                                       get-cities
-                                      get-wishlist]]))
+                                      get-wishlist]]
+            [warm_places.html_elements :refer [cities-list
+                                               wishlist-list]]))
 
 (enable-console-print!)
 
@@ -31,15 +33,15 @@
         (.appendChild (.getElementById js/document container-name) li-node)))
 
 (defn add-city-to-cities-ul [city]
-  (add-element-to-dom city "cities" click-in-cities-wrapper))
+  (add-element-to-dom city cities-list click-in-cities-wrapper))
 
 (defn add-city-to-wishlist-ul [city] 
-  (add-element-to-dom city "wishlist" click-in-wishlist-wrapper))
+  (add-element-to-dom city wishlist-list click-in-wishlist-wrapper))
 
 (defn update-cities-in-dom [list-of-cities]
-  (clean-list "cities")
+  (clean-list cities-list)
   (mapv add-city-to-cities-ul list-of-cities))
 
 (defn update-wishlist-in-dom [list-of-cities-in-wishlist]
-  (clean-list "wishlist")
+  (clean-list wishlist-list)
   (mapv add-city-to-wishlist-ul list-of-cities-in-wishlist))
