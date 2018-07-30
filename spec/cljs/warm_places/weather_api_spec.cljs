@@ -3,9 +3,9 @@
   (:require [speclj.core]
             [warm_places.general_api :refer [fetch
                                             extract-data]]
-            [warm_places.weather_api :refer [get-city-temp-hash
+            [warm_places.weather_api :refer [add-temperature-to-destination
                                             weather-api-url
-                                            add-temp-to-city-hash]]))
+                                            update-destination-with-json]]))
  (describe "weather-api-url"
     (it "builds a query string"
       (should=
@@ -19,17 +19,17 @@
 (def response-json-with-404 
   (.parse js/JSON "{\"cod\":\"404\",\"message\":\"city not found\"}"))
 
-(describe "add-temp-to-city-hash"
+(describe "update-destination-with-json"
     (it "returns a string of city and temperature from JSON on successfull response"
       (should=
       {:name "Bawku" :temp "27.22"}
-      (add-temp-to-city-hash (hash-map :name "Bawku") response-json-weather))))
+      (update-destination-with-json (hash-map :name "Bawku") response-json-weather))))
 
-(describe "add-temp-to-city-hash"
+(describe "update-destination-with-json"
     (it "returns name of city on response status 404"
       (should=
       {:name "Bawku" :temp "n/a"}
-      (add-temp-to-city-hash (hash-map :name "Bawku") response-json-with-404))))
+      (update-destination-with-json (hash-map :name "Bawku") response-json-with-404))))
 
 (describe "get-city-string"
     (with-stubs)
@@ -40,7 +40,7 @@
       extract-data (stub :extract-data-stub {:return :city-with-temp})
     ]
 
-    (get-city-temp-hash (hash-map :name "Krakow"))
+    (add-temperature-to-destination (hash-map :name "Krakow"))
 
     (should-have-invoked
       :weather-api-url-stub)
