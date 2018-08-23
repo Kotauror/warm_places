@@ -7,6 +7,7 @@
 1. Clone the repo 
 2. Build the project by running: `./clean; lein cljsbuild once`
 3. See the tests by running: `./clean; lein cljsbuild test`
+4. Open index.html in the browser
 
 ## What is it 
 
